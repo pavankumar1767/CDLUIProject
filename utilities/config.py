@@ -1,4 +1,4 @@
 class Config:
-    BASE_URL = "https://149.255.39.63"
+    BASE_URL = "http://admin-demo.nopcommerce.com"
     BROWSER = "chromium"  # Options: chromium, firefox, webkit
     HEADLESS = False
