@@ -1,0 +1,1 @@
+[31m[1mERROR   [0m conftest:conftest.py:116 Failed to delete video file: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\pavan.karri\\PycharmProjects\\Playwright_Framework\\videos\\161fb6b3533691f3b3e6cb9599292b05.webm'
