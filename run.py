@@ -11,7 +11,7 @@ if os.path.exists(report_dir):
 
 # Define test cases to run
 test_cases = [
-    "tests/test_login.py"
+    "tests/Login/test_Login.py"
 ]
 
 # Run pytest with Allure
