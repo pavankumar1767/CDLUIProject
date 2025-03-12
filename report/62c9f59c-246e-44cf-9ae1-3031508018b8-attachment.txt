@@ -1,0 +1,3 @@
+[1m[31mERROR   [0m root:filter_page.py:213 Failed to assert popup: Locator.wait_for: Timeout 10000ms exceeded.
+Call log:
+  - waiting for get_by_text("No wells selected for job creation.") to be visible

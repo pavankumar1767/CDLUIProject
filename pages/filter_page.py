@@ -1,7 +1,8 @@
 import random
+import time
 
 from playwright.sync_api import expect
-from pages.base_page import BasePage
+from pages.base_page import BasePage, logger
 
 
 class FilterPage(BasePage):
@@ -113,6 +114,10 @@ class FilterPage(BasePage):
         element_xpath = f"//span[contains(normalize-space(), '{button_text}')]"
         self.click(element_xpath, f"{button_text}")
 
+    def clickButton(self, button_text):
+        element_xpath = f"//span[normalize-space()='{button_text}']"
+        self.click(element_xpath, f"{button_text}")
+
     def deselectAll_objects(self, data_object):
         input_locator = self.page.locator(
             f"//mat-panel-title[normalize-space()='{data_object}']//ancestor::mat-expansion-panel/div"
@@ -144,7 +149,7 @@ class FilterPage(BasePage):
             self.select_object(object_name)
             self.deselectAll_objects(object_name)
 
-    def select_bharuns_checkboxes(self, data_object):
+    def select_object_checkboxes(self, data_object):
         # XPath pattern to select specific checkboxes by index, excluding "Select All"
         checkbox_xpath_pattern = f"(//mat-panel-title[normalize-space()='{data_object}']" \
                                  f"//ancestor::mat-expansion-panel/div" \
@@ -180,4 +185,43 @@ class FilterPage(BasePage):
                 print(f"Failed to select checkbox at index {index}: {e}")
         print(f"Successfully selected {num_to_select} checkboxes.")
 
+
+    def assert_filterListPage(self):
+        element_xpath = "//div[@class='filterlistMain']/h5"
+        title = self.get_text(element_xpath, "title of fiterListPage")
+        assert title == "Filters"
+
+    def enterFilterName(self, text):
+        element_xpath = "//mat-label[normalize-space()='Filter Name']/parent::label/parent::span/parent::div/input"
+        self.fill(element_xpath, text, "filter name")
+
+    # def assert_popup(self, text):
+    #     element_xpath = self.page.get_by_text(text)
+    #     # element_xpath = f"//span[text()='{text}']"
+    #     # self.wait_for_selector(element_xpath)
+    #     popup = self.get_text(element_xpath, f"pop up")
+    #     assert text == popup
+
+    def assert_popup(self, text):
+        try:
+            popup_locator = self.page.get_by_text(text)
+            popup_locator.wait_for(state="visible", timeout=10000)  # 10 seconds timeout
+            popup_text = popup_locator.text_content()
+            logger.info(f"Popup text: {popup_text}")
+            assert text == popup_text, f"Expected popup text: '{text}', but got: '{popup_text}'"
+        except Exception as e:
+            logger.error(f"Failed to assert popup: {e}")
+            self._capture_screenshot("Popup Assertion Error")
+            raise e
+
+    def assert_filter_visible(self, filtername):
+        element_xpath = f"//table//tbody/tr/td[normalize-space()='{filtername}']"
+        self.wait_for_selector(element_xpath)
+        element = self.page.locator(element_xpath)
+        assert element.is_visible(), f"Element with filter name '{filtername}' is not visible."
+
+
+    def edit_filter(self, filterName):
+        element_xpath = f"//table//tbody/tr/td[normalize-space()='{filterName}']/parent::tr/td[5]/button/span[normalize-space()='edit']"
+        self.click(element_xpath, f"{filterName} edit")
 

@@ -38,7 +38,7 @@ class TestTC05:
         filter_page.assert_wellname_button(well)
         filter_page.select_object(data_Object)
         filter_page.deselectAll_objects(data_Object)
-        filter_page.select_bharuns_checkboxes(data_Object)
+        filter_page.select_object_checkboxes(data_Object)
         filter_page.select_object(data_Object)
         filter_page.select_objects_and_select_all(Object_list)
         # extraction
