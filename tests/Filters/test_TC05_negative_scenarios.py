@@ -7,6 +7,7 @@ from pages.filter_page import FilterPage
 from pages.home_page import HomePage
 from pages.job_page import JobPage
 from pages.login_page import LoginPage
+from utilities.TestDataManager import TestDataManager
 from utilities.random_utils import RandomUtils
 
 
@@ -39,7 +40,8 @@ class TestTC05:
         login_page = LoginPage(page)
         filter_page = FilterPage(page)
 
-        well = "SND 14 23 FED COM 001 P26 225H"
+        test_data = TestDataManager.get_test_data()
+        well = test_data["wells"]["wellname_1"]
 
         login_page.navigate(config.BASE_URL)
         login_page.enter_username(config.username)
@@ -63,8 +65,10 @@ class TestTC05:
         login_page = LoginPage(page)
         filter_page = FilterPage(page)
 
-        well = "SND 14 23 FED COM 001 P26 225H"
-        Object_list = ["Logs", "BHA Run", "Trajectory", "Wellbore Geometry", "Rig"]
+
+        test_data = TestDataManager.get_test_data()
+        well = test_data["wells"]["wellname_1"]
+        Object_list = test_data["wells"]["objectlist"]
 
 
         login_page.navigate(config.BASE_URL)
@@ -100,9 +104,10 @@ class TestTC05:
         login_page.enter_password(config.password)
         login_page.click_login("Sign In")
 
-        well = "SND 14 23 FED COM 001 P26 225H"
-        log = "CALC_ATA"
-        Object_list = ["BHA Run", "Trajectory", "Wellbore Geometry"]
+        test_data = TestDataManager.get_test_data()
+        well = test_data["wells"]["wellname_1"]
+        log = test_data["wells"]["log_1"]
+        Object_list = test_data["wells"]["objectlist"]
 
         home_page.select_module("/filter")
         filter_page.assert_filterListPage()
@@ -140,9 +145,10 @@ class TestTC05:
         login_page.enter_password(config.password)
         login_page.click_login("Sign In")
 
-        well = "SND 14 23 FED COM 001 P26 225H"
-        log = "CALC_ATA"
-        Object_list = ["BHA Run", "Trajectory", "Wellbore Geometry"]
+        test_data = TestDataManager.get_test_data()
+        well = test_data["wells"]["wellname_1"]
+        log = test_data["wells"]["log_1"]
+        Object_list = test_data["wells"]["objectlist"]
 
         home_page.select_module("/filter")
         filter_page.assert_filterListPage()

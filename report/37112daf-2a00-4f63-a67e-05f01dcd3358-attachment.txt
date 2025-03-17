@@ -1,1 +1,0 @@
-Filling text 'Clark' into element: filter name

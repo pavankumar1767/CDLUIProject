@@ -8,6 +8,7 @@ from pages.home_page import HomePage
 from pages.job_page import JobPage
 from pages.login_page import LoginPage
 from utilities.DataStore import PropertyManager
+from utilities.TestDataManager import TestDataManager
 from utilities.random_utils import RandomUtils
 
 
@@ -23,7 +24,8 @@ class TestTC04:
         job_page = JobPage(page)
 
         filter_name = PropertyManager.get_property("filterName")
-        well = "SND 14 23 FED COM 001 P26 225H"
+        test_data = TestDataManager.get_test_data()
+        well = test_data["wells"]["wellname_1"]
         data_Object = "Trajectory"
 
         login_page.navigate(config.BASE_URL)

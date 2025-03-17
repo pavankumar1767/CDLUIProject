@@ -8,6 +8,7 @@ from pages.home_page import HomePage
 from pages.job_page import JobPage
 from pages.login_page import LoginPage
 from utilities.DataStore import PropertyManager
+from utilities.TestDataManager import TestDataManager
 from utilities.random_utils import RandomUtils
 
 
@@ -24,8 +25,10 @@ class TestTC03:
 
         filter_name = PropertyManager.get_property("filterName")
         New_filter_name = RandomUtils.get_last_name()
-        well = "SND 14 23 FED COM 001 P26 225H"
-        second_log = "CALC_MSE_DEPTH"
+
+        test_data = TestDataManager.get_test_data()
+        well = test_data["wells"]["wellname_1"]
+        second_log = test_data["wells"]["log_2"]
 
         login_page.navigate(config.BASE_URL)
         login_page.enter_username(config.username)
