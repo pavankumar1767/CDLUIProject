@@ -7,6 +7,8 @@ from pages.filter_page import FilterPage
 from pages.home_page import HomePage
 from pages.job_page import JobPage
 from pages.login_page import LoginPage
+from utilities.TestDataManager import TestDataManager
+
 
 @allure.suite("data extraction Rig")
 @pytest.mark.usefixtures("setup")
@@ -24,12 +26,14 @@ class TestTC05:
         login_page.enter_password(config.password)
         login_page.click_login("Sign In")
 
-        well = "SND 10 15 SCULL FED COM 001 2H"
+        test_data = TestDataManager.get_test_data()
+        well = test_data["wells"]["wellname_1"]
+        Object_list = test_data["wells"]["RigObjectlist"]
         data_Object = "Rig"
-        Object_list = ["Logs", "Trajectory"]
 
-        home_page.select_module("/filter")
-        filter_page.Button("Create")
+        home_page.select_module("/jobs")
+        filter_page.Button("Create Job")
+        filter_page.Button("Skip")
         filter_page.input_field(well)
         filter_page.click_search("searchicon")
         filter_page.select_well(well)
@@ -44,7 +48,6 @@ class TestTC05:
         filter_page.Button("Extract and Create Job")
         filter_page.Button("Yes")
         time.sleep(5)
-        home_page.select_module("/jobs")
 
         # job summary
         job_id = job_page.get_jobnumber()

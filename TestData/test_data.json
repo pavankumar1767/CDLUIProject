@@ -3,7 +3,11 @@
     "wellname_1": "SND 14 23 FED COM 001 P26 225H",
     "log_1": "CALC_ATA",
     "log_2": "CALC_MSE_DEPTH",
-    "objectlist": ["BHA Run", "Trajectory", "Wellbore Geometry", "Rig"]
+    "objectlist": ["BHA Run", "Trajectory", "Wellbore Geometry", "Rig"],
+    "trajObjectlist": ["BHA Run", "Logs", "Wellbore Geometry", "Rig"],
+    "WbObjectlist": ["BHA Run", "Logs", "Trajectory", "Rig"],
+    "RigObjectlist": ["BHA Run", "Logs", "Wellbore Geometry", "Trajectory"]
+
   },
   "filter_data": {
     "well_name": "SND 14 23 FED COM 001 P26 225H",
