@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 import allure
 import logging
 from utilities.logger import setup_logger
-from utilities.config import Config  # Import your configuration
+from utilities.FrameworkConfig import FrameworkConfig  # Import your configuration
 
 logger = setup_logger()
 
@@ -169,9 +169,11 @@ class BasePage:
         """
         try:
             # Check if screenshots are enabled for pass/fail cases
-            if (Config.LoggerScreenshot_ON_PASS == "yes" and not hasattr(self, "_test_failed")) or (
-                    Config.LoggerScreenshot_ON_FAIL == "yes" and hasattr(self, "_test_failed")):
+            if (FrameworkConfig.LoggerScreenshot_ON_PASS == "yes" and not hasattr(self, "_test_failed")) or (
+                    FrameworkConfig.LoggerScreenshot_ON_FAIL == "yes" and hasattr(self, "_test_failed")):
                 screenshot = self.page.screenshot(full_page=True)
                 allure.attach(screenshot, name=description, attachment_type=allure.attachment_type.PNG)
         except Exception as e:
             logger.error(f"Failed to capture screenshot: {e}")
+
+

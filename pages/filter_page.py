@@ -1,6 +1,7 @@
 import random
 import time
 
+import allure
 from playwright.sync_api import expect
 from pages.base_page import BasePage, logger
 
@@ -118,6 +119,11 @@ class FilterPage(BasePage):
         element_xpath = f"//span[normalize-space()='{button_text}']"
         self.click(element_xpath, f"{button_text}")
 
+    def AssertDisabledButton(self, button_text):
+        element = self.page.locator(f"//span[normalize-space()='{button_text}']/parent::button")
+        is_disabled = element.is_disabled()
+        assert is_disabled, f"Button '{button_text}' is not disabled."
+
     def deselectAll_objects(self, data_object):
         input_locator = self.page.locator(
             f"//mat-panel-title[normalize-space()='{data_object}']//ancestor::mat-expansion-panel/div"
@@ -187,7 +193,7 @@ class FilterPage(BasePage):
 
 
     def assert_filterListPage(self):
-        element_xpath = "//div[@class='filterlistMain']/h5"
+        element_xpath = "//div[@class='filterlistMain']//h5"
         title = self.get_text(element_xpath, "title of fiterListPage")
         assert title == "Filters"
 
@@ -202,16 +208,28 @@ class FilterPage(BasePage):
     #     popup = self.get_text(element_xpath, f"pop up")
     #     assert text == popup
 
+
     def assert_popup(self, text):
         try:
+            log_message = f"Asserting popup text: {text}"
+            logger.info(log_message)
+            allure.attach(log_message, name="Popup Assertion Log", attachment_type=allure.attachment_type.TEXT)
+
             popup_locator = self.page.get_by_text(text)
             popup_locator.wait_for(state="visible", timeout=10000)  # 10 seconds timeout
             popup_text = popup_locator.text_content()
-            logger.info(f"Popup text: {popup_text}")
+
+            allure.attach(popup_text, name="Popup Text", attachment_type=allure.attachment_type.TEXT)
+            self._capture_screenshot("Popup Displayed")
+
             assert text == popup_text, f"Expected popup text: '{text}', but got: '{popup_text}'"
+
         except Exception as e:
-            logger.error(f"Failed to assert popup: {e}")
-            self._capture_screenshot("Popup Assertion Error")
+            error_message = f"Failed to assert popup: {e}"
+            logger.error(error_message)
+            allure.attach(error_message, name="Popup Assertion Error Log", attachment_type=allure.attachment_type.TEXT)
+
+            self._capture_screenshot("Popup Assertion Error")  # Captures a screenshot
             raise e
 
     def assert_filter_visible(self, filtername):
@@ -222,6 +240,6 @@ class FilterPage(BasePage):
 
 
     def edit_filter(self, filterName):
-        element_xpath = f"//table//tbody/tr/td[normalize-space()='{filterName}']/parent::tr/td[5]/button/span[normalize-space()='edit']"
+        element_xpath = f"//table//tbody/tr/td[normalize-space()='{filterName}']/parent::tr/td[5]/button/span/mat-icon[normalize-space()='arrow_circle_right_icon']"
         self.click(element_xpath, f"{filterName} edit")
 

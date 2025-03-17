@@ -7,22 +7,21 @@ from pages.filter_page import FilterPage
 from pages.home_page import HomePage
 from pages.job_page import JobPage
 from pages.login_page import LoginPage
-from utilities.config import Config
 
 @allure.suite("data extraction single log")
 @pytest.mark.usefixtures("setup")
 class TestTC01:
     @allure.title("Filter well with single log")
-    def test_filter_single_log(self, setup):
+    def test_filter_single_log(self, setup, config):
         page = setup
         home_page = HomePage(page)
         login_page = LoginPage(page)
         filter_page = FilterPage(page)
         job_page = JobPage(page)
 
-        login_page.navigate(Config.BASE_URL)
-        login_page.enter_username(Config.username)
-        login_page.enter_password(Config.password)
+        login_page.navigate(config.BASE_URL)
+        login_page.enter_username(config.username)
+        login_page.enter_password(config.password)
         login_page.click_login("Sign In")
 
         well = "SND 14 23 FED COM 001 P26 225H"

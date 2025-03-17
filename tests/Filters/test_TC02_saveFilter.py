@@ -8,7 +8,6 @@ from pages.home_page import HomePage
 from pages.job_page import JobPage
 from pages.login_page import LoginPage
 from utilities.DataStore import PropertyManager
-from utilities.config import Config
 from utilities.random_utils import RandomUtils
 
 
@@ -16,7 +15,7 @@ from utilities.random_utils import RandomUtils
 @pytest.mark.usefixtures("setup")
 class TestTC02:
     @allure.title("Filter well with single log and save the filter")
-    def test_filter_extract_save(self, setup):
+    def test_filter_extract_save(self, setup, config):
         page = setup
         home_page = HomePage(page)
         login_page = LoginPage(page)
@@ -25,9 +24,9 @@ class TestTC02:
 
         filter_name = RandomUtils.get_last_name()
 
-        login_page.navigate(Config.BASE_URL)
-        login_page.enter_username(Config.username)
-        login_page.enter_password(Config.password)
+        login_page.navigate(config.BASE_URL)
+        login_page.enter_username(config.username)
+        login_page.enter_password(config.password)
         login_page.click_login("Sign In")
 
         well = "SND 14 23 FED COM 001 P26 225H"
@@ -49,16 +48,17 @@ class TestTC02:
         filter_page.select_logcurves(log)
         filter_page.click_log(log)
         filter_page.select_objects_and_select_all(Object_list)
+
         # extraction
         filter_page.Button("Save and Create Job")
         filter_page.enterFilterName(filter_name)
         filter_page.clickButton("add Save")
-        # filter_page.assertpopup("Filter saved successfully")
-        home_page.select_module("/jobs")
+        filter_page.assert_popup("Filter saved successfully")
+
         # job summary
         job_id = job_page.get_jobnumber()
         job_status = job_page.get_job_status(job_id)
-        # assert job_status == "In Progress"
+        assert job_status == "In Progress"
 
         home_page.select_module("/filter")
         filter_page.assert_filter_visible(filter_name)

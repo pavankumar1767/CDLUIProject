@@ -33,7 +33,7 @@ class JobPage(BasePage):
 
 
     def view_job(self, job_number):
-        element_xpath = f"//table[@class='mat-table cdk-table mat-sort jobs-table']/tbody/tr/td/span[text()='{job_number}']/ancestor::tr/td[6]/button[3]"
+        element_xpath = f"//table[@class='mat-table cdk-table mat-sort jobs-table']/tbody/tr/td/span[text()='{job_number}']/ancestor::tr/td[6]/button[1]"
         self.click(element_xpath, f"job {job_number} view")
 
     def assert_logs_checkbox_disabled(self, object_name):

@@ -17,10 +17,10 @@ test_cases = [
     # "tests/Job/test_TC04_wellboreGeometry.py",
     # "tests/Job/test_TC05_rig.py"
     # "tests/User/test_TC01_user.py"
-    # "tests/Filters/test_TC01_filter.py",
-    # "tests/Filters/test_TC02_saveFilter.py",
-    # "tests/Filters/test_TC03_editFilter.py",
-    # "tests/Filters/test_TC04_editExtractFilter.py"
+    "tests/Filters/test_TC01_extractFilter.py",
+    "tests/Filters/test_TC02_saveFilter.py",
+    "tests/Filters/test_TC03_editFilter.py",
+    "tests/Filters/test_TC04_editExtractFilter.py",
     "tests/Filters/test_TC05_negative_scenarios.py"
 
 ]
