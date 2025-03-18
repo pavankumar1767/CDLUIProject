@@ -1,12 +1,24 @@
 {
   "wells": {
     "wellname_1": "SND 14 23 FED COM 001 P26 225H",
+    "wellname_2": "SND JAVELINA UNIT 216H",
+    "wellname_3": "WR 677 St Malo #PS006 OCS-G 18745",
+    "wellname_4": "MC 607 Ballymore 1",
+    "wellname_5": "Ritter Unit 3H",
+    "wellname_6": "IAG-1E",
     "log_1": "CALC_ATA",
     "log_2": "CALC_MSE_DEPTH",
     "objectlist": ["BHA Run", "Trajectory", "Wellbore Geometry", "Rig"],
     "trajObjectlist": ["BHA Run", "Logs", "Wellbore Geometry", "Rig"],
     "WbObjectlist": ["BHA Run", "Logs", "Trajectory", "Rig"],
-    "RigObjectlist": ["BHA Run", "Logs", "Wellbore Geometry", "Trajectory"]
+    "RigObjectlist": ["BHA Run", "Logs", "Wellbore Geometry", "Trajectory"],
+    "MessageObjectlist": ["Logs", "Rig", "Trajectory"],
+    "FMObjectlist": ["Logs", "BHA Run", "Rig", "Trajectory", "Mud Log", "Wellbore Geometry"],
+    "MudlogObjectlist": ["Logs", "BHA Run", "Rig", "Trajectory", "Formation Marker", "Wellbore Geometry"],
+    "CementObjectlist": ["Logs", "BHA Run", "Rig", "Trajectory", "Formation Marker", "Wellbore Geometry"],
+    "RiskObjectlist": ["Logs", "Rig", "Trajectory", "Messages"],
+    "bharunObjectlist": ["Logs", "Mud Log", "Trajectory", "Messages", "Rig", "Wellbore Geometry"]
+
 
   },
   "filter_data": {

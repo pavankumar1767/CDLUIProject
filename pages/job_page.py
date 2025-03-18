@@ -58,18 +58,18 @@ class JobPage(BasePage):
             print(f"Input field {index} for '{object_name}' is correctly disabled.")
 
     def click_on_wellname(self, well_name):
-        element_xpath = f"//button[contains(normalize-space(),'{well_name}')]"
+        element_xpath = f"//button[contains(normalize-space(),'{well_name}')]/span[normalize-space()='+']"
         self.click(element_xpath, f"{well_name}")
 
     def click_on_wellbore(self, well_name, wellbore_name):
-        element_xpath = f"//button[contains(normalize-space(),'{well_name}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore_name}')]"
+        element_xpath = f"//button[contains(normalize-space(),'{well_name}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore_name}')]/span[normalize-space()='+']"
         self.click(element_xpath, f"{wellbore_name}")
 
     def assert_logdata_intowitsml(self, well, wellbore, log: list):
-        element_xpath = f"(//button[contains(normalize-space(),'{well}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]/parent::li/ul/li/span[contains(normalize-space(),'Log')])[1]"
+        element_xpath = f"(//button[contains(normalize-space(),'{well}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]/parent::li/ul/li/span[contains(normalize-space(),'Log')])[1]/span[normalize-space()='+']"
         self.click(element_xpath, "open log")
         for logs in log:
-            element_xpath_log = f"(//button[contains(normalize-space(),'{well}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]/parent::li/ul/li/span[contains(normalize-space(),'Log')]/parent::li/ul/li[contains(normalize-space(),'{logs}')]/span)[1]"
+            element_xpath_log = f"(//button[contains(normalize-space(),'{well}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]/parent::li/ul/li/span[contains(normalize-space(),'Log')]/parent::li/ul/li[contains(normalize-space(),'{logs}')]/span)[2]"
             color_dot = self.page.locator(element_xpath_log)
             background_color = color_dot.evaluate("element => getComputedStyle(element).backgroundColor")
             expected_green_color = "rgb(10, 206, 115)"  # Update this if the green color code differs
@@ -83,7 +83,7 @@ class JobPage(BasePage):
         element_xpath = (
             f"//button[contains(normalize-space(),'{well}')]/parent::h2"
             f"/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]"
-            f"/parent::li/ul/li/span[contains(normalize-space(),'{object_name}')]"
+            f"/parent::li/ul/li/span[contains(normalize-space(),'{object_name}')]/span[normalize-space()='+']"
         )
         self.click(element_xpath, "open log")
 
@@ -92,7 +92,7 @@ class JobPage(BasePage):
             f"//button[contains(normalize-space(),'{well}')]/parent::h2"
             f"/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]"
             f"/parent::li/ul/li/span[contains(normalize-space(),'{object_name}')]"
-            f"/parent::li/ul/li/span"
+            f"/parent::li/ul/li/span[2]"
         )
         # Locate all elements matching the XPath
         color_dots = self.page.locator(element_xpath_log)

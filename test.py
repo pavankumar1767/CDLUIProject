@@ -11,11 +11,16 @@ if os.path.exists(report_dir):
 
 # Define test cases to run
 test_cases = [
-    "tests/Job/test_TC01_log.py",
+    # "tests/Job/test_TC01_log.py",
     # "tests/Job/test_TC02_log.py",
     # "tests/Job/test_TC03_trajectory.py",
     # "tests/Job/test_TC04_wellboreGeometry.py",
-    # "tests/Job/test_TC05_rig.py"
+    # "tests/Job/test_TC05_rig.py",
+    # "tests/Job/test_TC06_message.py",
+    # "tests/Job/test_TC07_formationMarker.py",
+    "tests/Job/test_TC11_bharun.py",
+    # "tests/Job/test_TC10_risk.py"
+
     # "tests/User/test_TC01_user.py"
     # "tests/Filters/test_TC01_extractFilter.py",
     # "tests/Filters/test_TC02_saveFilter.py",

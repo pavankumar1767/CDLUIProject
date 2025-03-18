@@ -24,12 +24,12 @@ class FilterPage(BasePage):
         self.click(element_xpath, f"{button_text} Button")
 
     def select_well(self, well_name):
-        element_xpath = f"//table[@class='mat-table cdk-table mat-sort filter-well-table']//td[normalize-space()='{well_name}']/preceding-sibling::td/mat-checkbox"
+        element_xpath = f"(//table[@class='mat-table cdk-table mat-sort filter-well-table']//td[normalize-space()='{well_name}']/preceding-sibling::td/mat-checkbox)[1]"
         self.scroll_to_element(element_xpath, "scroll down upto well name")
         self.click(element_xpath, f"{well_name}")
 
     def get_wellbore_name(self, well_name):
-        element_xpath = f"//table[@class='mat-table cdk-table mat-sort filter-well-table']//td[normalize-space()='{well_name}']/ancestor::tr/td[3]"
+        element_xpath = f"(//table[@class='mat-table cdk-table mat-sort filter-well-table']//td[normalize-space()='{well_name}']/ancestor::tr/td[3])[1]"
         return self.get_text(element_xpath, f"{well_name} wellbore name")
 
     def assert_wellname_button(self, well_name):

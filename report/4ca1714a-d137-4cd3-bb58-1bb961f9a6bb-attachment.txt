@@ -1,1 +1,0 @@
-Clicking on element: SND 14 23 FED COM 001 P26 225H_267
