@@ -19,8 +19,6 @@
     "RiskObjectlist": ["Logs", "Rig", "Trajectory", "Messages"],
     "bharunObjectlist": ["Logs", "Mud Log", "Trajectory", "Messages", "Rig", "Wellbore Geometry"],
     "targetObjectlist": ["Logs", "BHA Run","Mud Log", "Tubular", "Trajectory", "Messages", "Rig", "Wellbore Geometry"]
-
-
   },
   "filter_data": {
     "well_name": "SND 14 23 FED COM 001 P26 225H",

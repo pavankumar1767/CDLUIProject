@@ -1,0 +1,1 @@
+Clicking on element: filter -> select all permissions
