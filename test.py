@@ -18,7 +18,7 @@ test_cases = [
     # "tests/Job/test_TC05_rig.py",
     # "tests/Job/test_TC06_message.py",
     # "tests/Job/test_TC07_formationMarker.py",
-    "tests/Job/test_TC11_bharun.py",
+    "tests/Job/test_TC12_target.py",
     # "tests/Job/test_TC10_risk.py"
 
     # "tests/User/test_TC01_user.py"
