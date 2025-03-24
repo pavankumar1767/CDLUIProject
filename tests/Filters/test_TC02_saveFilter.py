@@ -63,6 +63,7 @@ class TestTC02:
         assert job_status == "In Progress"
 
         home_page.select_module("/filter")
+        filter_page.SearchByFilter(filter_name)
         filter_page.assert_filter_visible(filter_name)
 
         PropertyManager.set_property("filterName", filter_name)

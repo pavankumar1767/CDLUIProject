@@ -38,6 +38,7 @@ class TestTC01:
         user_page.input("group_name", groupName)
         group_page.Button_2("Add")
         filter_page.assert_popup("Group created successfully.")
+        user_page.search(groupName)
         group_page.selectIcon(groupName, "settings")
         group_page.selectAllObjectsList(permissionsList)
         user_page.Button("Save")

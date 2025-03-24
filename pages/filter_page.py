@@ -243,3 +243,9 @@ class FilterPage(BasePage):
         element_xpath = f"//table//tbody/tr/td[normalize-space()='{filterName}']/parent::tr/td[5]/button/span/mat-icon[normalize-space()='arrow_circle_right_icon']"
         self.click(element_xpath, f"{filterName} edit")
 
+
+    def SearchByFilter(self, text):
+        element_xpath = "//input[@data-placeholder = 'Search by Filter name']"
+        self.fill(element_xpath,text,f"{text}")
+
+

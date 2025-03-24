@@ -36,6 +36,7 @@ test_cases = [
     # "tests/GroupAndUser/test_TC06_deleteGroup.py",
     "tests/Login/test_Login.py",
 
+
 ]
 
 # Run pytest with Allure

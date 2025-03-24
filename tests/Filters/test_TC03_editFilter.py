@@ -37,6 +37,7 @@ class TestTC03:
 
         home_page.select_module("/filter")
         filter_page.assert_filterListPage()
+        filter_page.SearchByFilter(filter_name)
         filter_page.edit_filter(filter_name)
         filter_page.assert_wellname_button(well)
         filter_page.select_object("Logs")

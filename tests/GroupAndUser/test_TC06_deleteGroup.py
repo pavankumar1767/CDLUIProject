@@ -32,6 +32,7 @@ class TestTC06:
         login_page.click_login("Sign In")
 
         home_page.select_module("/role-permission")
+        user_page.search(groupName)
         group_page.selectIcon(groupName, "delete")
         user_page.Button("Delete")
         filter_page.assert_popup(f"Group '{groupName}' has been deleted successfully.")
