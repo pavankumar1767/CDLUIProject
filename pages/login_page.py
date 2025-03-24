@@ -28,3 +28,7 @@ class LoginPage(BasePage):
     def get_invalidUserError(self):
         element_xpath = "//div[normalize-space()='User does not exist']"
         return self.get_text(element_xpath, "invalid user error message")
+
+    def toggle_password_visibility(self):
+        eye_icon = "//mat-icon[text()='visibility']"
+        self.click(eye_icon, "password masking")

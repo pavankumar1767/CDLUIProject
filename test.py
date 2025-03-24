@@ -21,18 +21,20 @@ test_cases = [
     # "tests/Job/test_TC12_target.py",
     # "tests/Job/test_TC10_risk.py"
 
-    # "tests/User/test_TC02_createUser.py"
+    # "tests/GroupAndUser/test_TC02_createUser.py"
     # "tests/Filters/test_TC01_extractFilter.py",
     # "tests/Filters/test_TC02_saveFilter.py",
     # "tests/Filters/test_TC03_editFilter.py",
     # "tests/Filters/test_TC04_editExtractFilter.py",
     # "tests/Filters/test_TC05_negative_scenarios.py"
-    "tests/User/test_TC01_createGroup.py",
-    "tests/User/test_TC02_createUser.py",
-    "tests/User/test_TC03_updateUser.py",
-    "tests/User/test_TC04_dataExtraction.py",
-    "tests/User/test_TC05_deleteUser.py",
-    "tests/User/test_TC06_deleteGroup.py",
+    # "tests/GroupAndUser/test_TC01_createGroup.py",
+    # "tests/GroupAndUser/test_TC02_createUser.py",
+    # "tests/GroupAndUser/test_TC03_updateUser.py",
+    # "tests/GroupAndUser/test_TC04_dataExtraction.py",
+    # "tests/GroupAndUser/test_TC05_negativeScenarios.py",
+    # "tests/GroupAndUser/test_TC07_deleteUser.py",
+    # "tests/GroupAndUser/test_TC06_deleteGroup.py",
+    "tests/Login/test_Login.py",
 
 ]
 
