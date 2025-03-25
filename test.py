@@ -32,9 +32,10 @@ test_cases = [
     # "tests/GroupAndUser/test_TC03_updateUser.py",
     # "tests/GroupAndUser/test_TC04_dataExtraction.py",
     # "tests/GroupAndUser/test_TC05_negativeScenarios.py",
-    # "tests/GroupAndUser/test_TC07_deleteUser.py",
-    # "tests/GroupAndUser/test_TC06_deleteGroup.py",
-    "tests/Login/test_Login.py",
+    # "tests/GroupAndUser/test_TC06_deleteUser.py",
+    # "tests/GroupAndUser/test_TC07_deleteGroup.py",
+    "tests/GroupAndUser/test_TC08_groupPermissions.py",
+    # "tests/Login/test_Login.py",
 
 
 ]

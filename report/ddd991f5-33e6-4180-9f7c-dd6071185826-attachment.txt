@@ -1,0 +1,1 @@
+Asserting popup text: Group created successfully.

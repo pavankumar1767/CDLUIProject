@@ -21,4 +21,8 @@ class GroupsPage(BasePage):
         for permission in permissions:
             self.selectAllPermissions(permission)
 
+    def selectReadPermission(self, module_name):
+        element_xpath = f"//h2[contains(normalize-space(),'Permissions')]/ancestor::mat-dialog-container//table/tbody/tr/td[normalize-space()='{module_name}']/parent::tr/td[3]/mat-checkbox"
+        self.click(element_xpath, f"{module_name} -> select all permissions")
+
 

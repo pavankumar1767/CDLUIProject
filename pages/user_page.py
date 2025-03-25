@@ -10,6 +10,14 @@ class UserPage(BasePage):
         element_xpath = f"//span[contains(normalize-space(), '{button_text}')]"
         self.click(element_xpath, f"{button_text}")
 
+    def AssertButtonInvisibility(self, button_text):
+        try:
+            element_xpath = f"//span[contains(normalize-space(), '{button_text}')]"
+            self.wait_for_selector(element_xpath)
+            assert False, f"Module '{button_text}' is present"
+        except:
+            assert True, f"Module '{button_text}' is NOT present"
+
     def input(self, input_name, text):
         element_xpath = f"//input[@ng-reflect-name='{input_name}']"
         self.fill(element_xpath, text, input_name)

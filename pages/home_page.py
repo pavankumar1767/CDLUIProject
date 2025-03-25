@@ -12,3 +12,12 @@ class HomePage(BasePage):
         element_xpath = f"//li[@ng-reflect-router-link='{module_name}']"
         self.click(element_xpath, f"{module_name}")
 
+
+    def Assert_moduleInvisibility(self, module_name):
+        try:
+            element_xpath = f"//li[@ng-reflect-router-link='{module_name}']"
+            self.wait_for_selector(element_xpath)
+            assert False, f"Module '{module_name}' is present"
+        except:
+            assert True, f"Module '{module_name}' is NOT present"
+

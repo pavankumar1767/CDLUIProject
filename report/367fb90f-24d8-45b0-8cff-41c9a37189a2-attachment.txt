@@ -1,0 +1,1 @@
+Clicking on element: Settings -> select all permissions

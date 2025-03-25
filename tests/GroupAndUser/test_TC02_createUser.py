@@ -33,7 +33,7 @@ class TestTC02:
         login_page.click_login("Sign In")
 
         home_page.select_module("/user-list")
-        user_page.Button("Add GroupAndUser")
+        user_page.Button("Add User")
         user_page.input("username", userName)
         user_page.input("password", config.setpassword)
         user_page.input("fname", firstName)
@@ -44,7 +44,7 @@ class TestTC02:
         user_page.input("mobile", RandomUtils.get_mobile_number())
         user_page.selectRoles("roles", [PropertyManager.get_property("groupName")])
         user_page.Button("Save")
-        filter_page.assert_popup("GroupAndUser created successfully")
+        filter_page.assert_popup("User created successfully")
 
         PropertyManager.set_property("userName", userName)
         PropertyManager.set_property("firstName", firstName)
