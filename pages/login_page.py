@@ -32,3 +32,9 @@ class LoginPage(BasePage):
     def toggle_password_visibility(self):
         eye_icon = "//mat-icon[text()='visibility']"
         self.click(eye_icon, "password masking")
+
+    def logout(self):
+        element_xpath = "//mat-icon[normalize-space()='account_circle']"
+        self.click(element_xpath, "profile icon")
+        second_element_xpath = "//mat-icon[normalize-space()='logout']"
+        self.click(second_element_xpath, "logout")

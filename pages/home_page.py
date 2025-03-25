@@ -21,3 +21,11 @@ class HomePage(BasePage):
         except:
             assert True, f"Module '{module_name}' is NOT present"
 
+    def Assert_moduleVisibility(self, module_name):
+        try:
+            element_xpath = f"//li[@ng-reflect-router-link='{module_name}']"
+            self.wait_for_selector(element_xpath)
+            assert True, f"Module '{module_name}' is present"
+        except:
+            assert False, f"Module '{module_name}' is NOT present"
+

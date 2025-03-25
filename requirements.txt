@@ -1,5 +1,6 @@
-playwright
-pytest
+playwright~=1.50.0
+pytest~=8.3.4
 pytest-playwright
 allure-pytest
-Faker
+Faker~=36.2.2
+allure-python-commons~=2.13.5
