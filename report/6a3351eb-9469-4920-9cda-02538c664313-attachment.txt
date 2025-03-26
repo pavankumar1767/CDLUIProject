@@ -1,1 +1,0 @@
-Waiting for element: //span[contains(normalize-space(), 'Create')]

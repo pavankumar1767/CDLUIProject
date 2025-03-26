@@ -20,6 +20,7 @@ test_cases = [
     # "tests/Job/test_TC07_formationMarker.py",
     # "tests/Job/test_TC12_target.py",
     # "tests/Job/test_TC10_risk.py"
+    "tests/Job/test_TC14_singleRigObject.py",
 
     # "tests/GroupAndUser/test_TC02_createUser.py"
     # "tests/Filters/test_TC01_extractFilter.py",
@@ -35,7 +36,7 @@ test_cases = [
     # "tests/GroupAndUser/test_TC06_deleteUser.py",
     # "tests/GroupAndUser/test_TC07_deleteGroup.py",
     # "tests/GroupAndUser/test_TC08_groupPermissions.py",
-    "tests/GroupAndUser/test_TC09_multipleGroups.py",
+    # "tests/GroupAndUser/te/st_TC09_multipleGroups.py",
 
     # "tests/Login/test_Login.py",
 

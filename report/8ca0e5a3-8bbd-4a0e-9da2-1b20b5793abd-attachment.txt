@@ -1,1 +1,0 @@
-Filling text 'Long' into element: group_name

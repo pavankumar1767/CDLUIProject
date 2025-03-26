@@ -111,6 +111,11 @@ class FilterPage(BasePage):
             self._capture_screenshot(f"Selected checkbox at index {index}")
         print(f"Successfully selected {num_to_select} log curves.")
 
+    def select_logcurve(self, log, logcurve: list):
+        for curve in logcurve:  # Ensure it works for multiple elements
+            element_xpath = f"//mat-panel-title[normalize-space()='{log}']//ancestor::mat-expansion-panel-header/following-sibling::div//h4[normalize-space()='Select Curves:']//../mat-checkbox/label/span[contains(normalize-space(),'{curve}')]"
+            self.click(element_xpath, f"{curve}")
+
     def Button(self, button_text):
         element_xpath = f"//span[contains(normalize-space(), '{button_text}')]"
         self.click(element_xpath, f"{button_text}")
@@ -191,6 +196,10 @@ class FilterPage(BasePage):
                 print(f"Failed to select checkbox at index {index}: {e}")
         print(f"Successfully selected {num_to_select} checkboxes.")
 
+    def select_ObjectCheckbox(self, dataObject, Object: list):
+        for obj in Object:  # Loop through each object in the list
+            element_xpath = f"//mat-panel-title[normalize-space()='{dataObject}']//ancestor::mat-expansion-panel/div//mat-checkbox[not(.//span[contains(normalize-space(), 'Select All')])]/label/span[contains(normalize-space(),'{obj}')]"
+            self.click(element_xpath, f"{obj}")
 
     def assert_filterListPage(self):
         element_xpath = "//div[@class='filterlistMain']//h5"
