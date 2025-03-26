@@ -10,11 +10,11 @@ from pages.login_page import LoginPage
 from utilities.TestDataManager import TestDataManager
 
 
-@allure.suite("data extraction Risk")
+@allure.suite("data extraction bharun and tubular")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with Risk")
-    def test_filter_risk(self, setup, config):
+    @allure.title("Filter well with bharun and tubular")
+    def test_filter_BharunAndTubular(self, setup, config):
         page = setup
         home_page = HomePage(page)
         login_page = LoginPage(page)
@@ -28,10 +28,9 @@ class TestTC03:
 
         test_data = TestDataManager.get_test_data()
         well = test_data["wells"]["wellname_6"]
-        Object_list = test_data["wells"]["bharunObjectlist"]
+        Object_list = test_data["wells"]["trajObjectlist"]
         data_Object = "BHA Run"
         data_Object_1 = "Tubular"
-
 
         home_page.select_module("/jobs")
         filter_page.Button("Create Job")
@@ -41,7 +40,14 @@ class TestTC03:
         filter_page.select_well(well)
         wellbore_name = filter_page.get_wellbore_name(well)
         filter_page.assert_wellname_button(well)
-
+        filter_page.select_object(data_Object)
+        filter_page.deselectAll_objects(data_Object)
+        filter_page.select_ObjectCheckbox(data_Object, ["8TJMG30"])
+        filter_page.select_object(data_Object)
+        filter_page.select_object(data_Object)
+        filter_page.deselectAll_objects(data_Object)
+        filter_page.select_ObjectCheckbox(data_Object, ["8TJMG30"])
+        filter_page.select_object(data_Object)
         filter_page.select_objects_and_select_all(Object_list)
         # extraction
         filter_page.Button("Extract and Create Job")
@@ -51,11 +57,12 @@ class TestTC03:
         # job summary
         job_id = job_page.get_jobnumber()
         job_status = job_page.get_job_status(job_id)
-        # job_page.assert_job_status(job_id)
+        job_page.assert_job_status(job_id)
         job_page.view_job(job_id)
 
         filter_page.select_object(data_Object)
         job_page.assert_objects_checkbox_disabled(data_Object)
+
         filter_page.select_object(data_Object_1)
         job_page.assert_objects_checkbox_disabled(data_Object_1)
 
@@ -64,9 +71,16 @@ class TestTC03:
 
         job_page.click_on_wellname(well_id)
         job_page.click_on_wellbore(well_id, wellbore_id)
-        # need to upadte with green color coordinates
-        job_page.assert_data_intowitsml(data_Object, well_id, wellbore_id)
-        job_page.assert_data_intowitsml(data_Object_1, well_id, wellbore_id)
+        # need to update with green color coordinates
+        job_page.assert_data_intowitsml(data_Object,well_id, wellbore_id)
+        job_page.assert_data_intowitsml(data_Object_1,well_id, wellbore_id)
+
+
+
+
+
+
+
 
 
 

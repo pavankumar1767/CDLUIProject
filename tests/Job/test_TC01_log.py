@@ -43,7 +43,7 @@ class TestTC01:
         filter_page.deselect_all_logs()
         filter_page.select_log(log)
         filter_page.click_log(log)
-        filter_page.select_logcurves(log)
+        filter_page.select_logcurve(log, ["TIME", "PIT01"])
         filter_page.click_log(log)
         filter_page.select_objects_and_select_all(Object_list)
         # extraction

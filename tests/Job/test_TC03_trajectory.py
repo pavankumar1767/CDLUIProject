@@ -27,7 +27,7 @@ class TestTC03:
         login_page.click_login("Sign In")
 
         test_data = TestDataManager.get_test_data()
-        well = test_data["wells"]["wellname_1"]
+        well = test_data["wells"]["wellname_6"]
         Object_list = test_data["wells"]["trajObjectlist"]
         data_Object = "Trajectory"
 
@@ -41,7 +41,7 @@ class TestTC03:
         filter_page.assert_wellname_button(well)
         filter_page.select_object(data_Object)
         filter_page.deselectAll_objects(data_Object)
-        filter_page.select_object_checkboxes(data_Object)
+        filter_page.select_ObjectCheckbox(data_Object, ["1TJMG30"])
         filter_page.select_object(data_Object)
         filter_page.select_objects_and_select_all(Object_list)
         # extraction

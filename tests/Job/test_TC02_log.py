@@ -46,12 +46,12 @@ class TestTC02:
         # first log
         filter_page.select_log(log)
         filter_page.click_log(log)
-        filter_page.select_logcurves(log)
+        filter_page.select_logcurve(log, ["TIME"])
         filter_page.click_log(log)
         # second log
         filter_page.select_log(second_log)
         filter_page.click_log(second_log)
-        filter_page.select_logcurves(second_log)
+        filter_page.select_logcurve(log, ["DEPTHV"])
         filter_page.click_log(second_log)
         # uncheck remaining objects
         filter_page.select_objects_and_select_all(Object_list)
