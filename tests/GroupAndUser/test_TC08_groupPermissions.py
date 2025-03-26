@@ -16,7 +16,7 @@ from utilities.random_utils import RandomUtils
 @allure.suite("GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC08:
-    @allure.title("Verify that Group Creation without filters permission")
+    @allure.title("Verify that user and Group Creation without filters permission")
     def test_crate_group(self, setup, config):
         page = setup
         home_page = HomePage(page)
@@ -45,23 +45,10 @@ class TestTC08:
         filter_page.assert_popup("Permissions updated successfully with dependencies applied.")
         PropertyManager.set_property("groupName", groupName)
 
-    @allure.title(f"Verify user creation with created group")
-    def test_create_user(self, setup, config):
-        page = setup
-        home_page = HomePage(page)
-        login_page = LoginPage(page)
-        user_page = UserPage(page)
-        filter_page = FilterPage(page)
-
         userName = RandomUtils.get_user_name()
         firstName = RandomUtils.get_first_name()
         lastName = RandomUtils.get_last_name()
         email = RandomUtils.get_email()
-
-        login_page.navigate(config.BASE_URL)
-        login_page.enter_username(config.username)
-        login_page.enter_password(config.password)
-        login_page.click_login("Sign In")
 
         home_page.select_module("/user-list")
         user_page.Button("Add User")
@@ -76,7 +63,6 @@ class TestTC08:
         user_page.selectRoles("roles", [PropertyManager.get_property("groupName")])
         user_page.Button("Save")
         filter_page.assert_popup("User created successfully")
-
         PropertyManager.set_property("userName", userName)
         PropertyManager.set_property("firstName", firstName)
         PropertyManager.set_property("lastName", lastName)
@@ -136,13 +122,14 @@ class TestTC08:
         home_page.select_module("/jobs")
         user_page.AssertButtonInvisibility("Create Job")
 
-    @allure.title("delete user")
+    @allure.title("delete user and group")
     def test_delete_user(self, setup, config):
         page = setup
         home_page = HomePage(page)
         login_page = LoginPage(page)
         user_page = UserPage(page)
         filter_page = FilterPage(page)
+        group_page = GroupsPage(page)
 
         user = f"{PropertyManager.get_property("firstName")} {PropertyManager.get_property("lastName")}"
         login_page.navigate(config.BASE_URL)
@@ -155,22 +142,7 @@ class TestTC08:
         user_page.selectUser(user, "delete")
         user_page.Button("Delete")
         filter_page.assert_popup(f"User {PropertyManager.get_property("userName")} deleted successfully")
-
-    @allure.title("delete Group")
-    def test_delete_group(self, setup, config):
-        page = setup
-        home_page = HomePage(page)
-        login_page = LoginPage(page)
-        user_page = UserPage(page)
-        group_page = GroupsPage(page)
-        filter_page = FilterPage(page)
-
         groupName = PropertyManager.get_property("groupName")
-
-        login_page.navigate(config.BASE_URL)
-        login_page.enter_username(config.username)
-        login_page.enter_password(config.password)
-        login_page.click_login("Sign In")
 
         home_page.select_module("/role-permission")
         user_page.search(groupName)
