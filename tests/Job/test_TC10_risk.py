@@ -41,7 +41,7 @@ class TestTC03:
         filter_page.assert_wellname_button(well)
         filter_page.select_object(data_Object)
         filter_page.deselectAll_objects(data_Object)
-        filter_page.select_object_checkboxes(data_Object)
+        filter_page.select_ObjectCheckbox(data_Object, ["4B6918D5-6D14-40C9-BF8F-084313CF7251"])
         filter_page.select_object(data_Object)
         filter_page.select_objects_and_select_all(Object_list)
         # extraction

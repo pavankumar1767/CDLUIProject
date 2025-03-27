@@ -1,1 +1,0 @@
-Group 'Garcia' has been deleted successfully.

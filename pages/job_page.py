@@ -24,6 +24,10 @@ class JobPage(BasePage):
                 assert job_status == "Completed"
                 print("Job status is completed.")
                 break
+            elif job_status == "Failed":
+                assert job_status == "Failed"  # Explicitly fail the test case
+                print("Job status is 'Failed'. Test case will fail.")
+                raise AssertionError(f"Job status is 'Failed'.")
             print(f"Attempt {attempt + 1}: Status is '{job_status}'. Refreshing...")
             element_xpath = "//mat-icon[normalize-space()='refresh']"
             self.click(element_xpath, "refresh")

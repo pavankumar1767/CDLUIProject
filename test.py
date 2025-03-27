@@ -13,7 +13,7 @@ if os.path.exists(report_dir):
 test_cases = [
     # "tests/Job/test_TC01_log.py",
     # "tests/Job/test_TC02_log.py",
-    # "tests/Job/test_TC03_trajectory.py",
+    "tests/Job/test_TC03_trajectory.py",
     # "tests/Job/test_TC04_wellboreGeometry.py",
     # "tests/Job/test_TC05_rig.py",
     # "tests/Job/test_TC06_message.py",
@@ -35,7 +35,7 @@ test_cases = [
     # "tests/GroupAndUser/test_TC05_negativeScenarios.py",
     # "tests/GroupAndUser/test_TC06_deleteUser.py",
     # "tests/GroupAndUser/test_TC07_deleteGroup.py",
-    "tests/GroupAndUser/test_TC08_groupPermissions.py",
+    # "tests/GroupAndUser/test_TC08_groupPermissions.py",
     # "tests/GroupAndUser/te/st_TC09_multipleGroups.py",
 
     # "tests/Login/test_Login.py",
