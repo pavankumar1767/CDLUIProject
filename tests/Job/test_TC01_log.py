@@ -54,7 +54,7 @@ class TestTC01:
         # job summary
         job_id = job_page.get_jobnumber()
         job_status = job_page.get_job_status(job_id)
-        # job_page.assert_job_status(job_id)
+        job_page.assert_job_status(job_id)
         job_page.view_job(job_id)
 
         filter_page.select_object("Logs")

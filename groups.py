@@ -19,7 +19,7 @@ test_cases = [
     "tests/GroupAndUser/test_TC06_deleteUser.py",
     "tests/GroupAndUser/test_TC07_deleteGroup.py",
     "tests/GroupAndUser/test_TC08_groupPermissions.py",
-    "tests/GroupAndUser/te/st_TC09_multipleGroups.py",
+    "tests/GroupAndUser/test_TC09_multipleGroups.py",
 ]
 
 # Run pytest with Allure

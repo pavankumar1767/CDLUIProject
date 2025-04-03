@@ -36,7 +36,7 @@ class TestTC03:
         user_page.selectUser(user, "edit")
         user_page.input("email", email)
         user_page.Button("Save")
-        filter_page.assert_popup("GroupAndUser updated successfully.")
+        filter_page.assert_popup("User updated successfully.")
         assert email.lower() == user_page.getEmail(user)
 
 

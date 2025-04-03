@@ -1,1 +1,0 @@
-Clicking on element: DEPTH_SURFACE

@@ -33,7 +33,7 @@ class TestTC06:
         user_page.search(user)
         user_page.selectUser(user, "delete")
         user_page.Button("Delete")
-        filter_page.assert_popup(f"GroupAndUser {PropertyManager.get_property("userName")} deleted successfully")
+        filter_page.assert_popup(f"User {PropertyManager.get_property("userName")} deleted successfully")
 
 
 

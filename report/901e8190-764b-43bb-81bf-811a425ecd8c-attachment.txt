@@ -1,1 +1,0 @@
-Asserting popup text: Please provide at least one search criterion.

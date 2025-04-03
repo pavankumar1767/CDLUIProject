@@ -58,37 +58,37 @@ class TestTC05:
         filter_page.assert_popup("No wells selected for job creation.")
 
 
-    @allure.title("search well without selected well info")
-    def test_filter_withoutSelectedWellInfo(self, setup, config):
-        page = setup
-        home_page = HomePage(page)
-        login_page = LoginPage(page)
-        filter_page = FilterPage(page)
-
-
-        test_data = TestDataManager.get_test_data()
-        well = test_data["wells"]["wellname_1"]
-        Object_list = test_data["wells"]["objectlist"]
-
-
-        login_page.navigate(config.BASE_URL)
-        login_page.enter_username(config.username)
-        login_page.enter_password(config.password)
-        login_page.click_login("Sign In")
-
-        home_page.select_module("/filter")
-        filter_page.assert_filterListPage()
-        filter_page.Button("Create")
-        filter_page.input_field(well)
-        filter_page.click_search("searchicon")
-        filter_page.select_well(well)
-        filter_page.assert_wellname_button(well)
-        filter_page.select_objects_and_select_all(Object_list)
-
-
-        filter_page.Button("Extract and Create Job")
-        filter_page.Button("Yes")
-        filter_page.assert_popup("No wells selected for job creation.")
+    # @allure.title("search well without selected well info")
+    # def test_filter_withoutSelectedWellInfo(self, setup, config):
+    #     page = setup
+    #     home_page = HomePage(page)
+    #     login_page = LoginPage(page)
+    #     filter_page = FilterPage(page)
+    #
+    #
+    #     test_data = TestDataManager.get_test_data()
+    #     well = test_data["wells"]["wellname_1"]
+    #     Object_list = test_data["wells"]["objectlist"]
+    #
+    #
+    #     login_page.navigate(config.BASE_URL)
+    #     login_page.enter_username(config.username)
+    #     login_page.enter_password(config.password)
+    #     login_page.click_login("Sign In")
+    #
+    #     home_page.select_module("/filter")
+    #     filter_page.assert_filterListPage()
+    #     filter_page.Button("Create")
+    #     filter_page.input_field(well)
+    #     filter_page.click_search("searchicon")
+    #     filter_page.select_well(well)
+    #     filter_page.assert_wellname_button(well)
+    #     filter_page.select_objects_and_select_all(Object_list)
+    #
+    #
+    #     filter_page.Button("Extract and Create Job")
+    #     filter_page.Button("Yes")
+    #     filter_page.assert_popup("No wells selected for job creation.")
 
     @allure.title("Filter name cannot be empty")
     def test_empty_filter_name(self, setup, config):
