@@ -3,7 +3,7 @@ class FrameworkConfig:
     HEADLESS = False
 
     # Report configurations
-    VIDEO_ON_PASS = "yes"
+    VIDEO_ON_PASS = "no"
     VIDEO_ON_FAIL = "yes"
     SCREENSHOT_ON_PASS = "no"
     SCREENSHOT_ON_FAIL = "yes"

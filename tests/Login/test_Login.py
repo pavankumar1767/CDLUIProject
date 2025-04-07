@@ -22,18 +22,18 @@ class TestLogin:
         login_page.click_login("Sign In")
         assert login_page.get_title(config.username) == config.username
 
-    # @allure.title("Login_02 : Verify that an error message is displayed when incorrect credentials are entered.")
-    # def test_invalid_login(self, setup, config):
-    #     page = setup
-    #     login_page = LoginPage(page)
-    #     filter_page = FilterPage(page)
-    #
-    #     login_page.navigate(config.BASE_URL)
-    #     login_page.enter_username("QA")
-    #     login_page.enter_password("QAtest@123")
-    #     login_page.click_login("Sign In")
-    #     filter_page.assert_popup("User does not exist")
-    #
+    @allure.title("Login_02 : Verify that an error message is displayed when incorrect credentials are entered.")
+    def test_invalid_login(self, setup, config):
+        page = setup
+        login_page = LoginPage(page)
+        filter_page = FilterPage(page)
+
+        login_page.navigate(config.BASE_URL)
+        login_page.enter_username("QA")
+        login_page.enter_password("QAtest@123")
+        login_page.click_login("Sign In")
+        filter_page.assert_popup("User does not exist")
+
     # @allure.title("Login_03 : Verify an appropriate error is shown when the username field is left blank.")
     # def test_login_blankUsername(self, setup, config):
     #     page = setup
@@ -77,5 +77,5 @@ class TestLogin:
     #     login_page.enter_password(config.password)
     #     login_page.toggle_password_visibility()
     #     assert login_page.page.locator(login_page.password_field).get_attribute("type") == "text"
-    #
-    #
+
+
