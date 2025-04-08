@@ -15,7 +15,7 @@ from utilities.random_utils import RandomUtils
 @allure.suite("GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC04:
-    @allure.title("Filter well with created user for single log")
+    @allure.title("Verify Filter well with created user for single log")
     def test_filter_single_log(self, setup, config):
         page = setup
         home_page = HomePage(page)

@@ -15,7 +15,7 @@ from utilities.random_utils import RandomUtils
 @allure.suite("GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC01:
-    @allure.title("create Group")
+    @allure.title("Verify user should be able to create Group")
     def test_crate_group(self, setup, config):
         page = setup
         home_page = HomePage(page)

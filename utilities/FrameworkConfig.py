@@ -1,6 +1,6 @@
 class FrameworkConfig:
     BROWSER = "chromium"  # Options: chromium, firefox, webkit
-    HEADLESS = True
+    HEADLESS = False
 
     # Report configurations
     VIDEO_ON_PASS = "no"

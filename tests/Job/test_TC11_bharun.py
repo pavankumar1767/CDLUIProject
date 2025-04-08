@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction bharun and tubular")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with bharun and tubular")
+    @allure.title("Verify Filter well with bharun and tubular")
     def test_filter_BharunAndTubular(self, setup, config):
         page = setup
         home_page = HomePage(page)

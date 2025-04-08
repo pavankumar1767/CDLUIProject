@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction Target")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with Target")
+    @allure.title("Verify Filter well with Target")
     def test_filter_target(self, setup, config):
         page = setup
         home_page = HomePage(page)

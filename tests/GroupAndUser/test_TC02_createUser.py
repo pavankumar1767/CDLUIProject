@@ -14,7 +14,7 @@ from utilities.random_utils import RandomUtils
 @allure.suite("GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC02:
-    @allure.title("create user")
+    @allure.title("Verify user should be able to create user")
     def test_create_user(self, setup, config):
         page = setup
         home_page = HomePage(page)

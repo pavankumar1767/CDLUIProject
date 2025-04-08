@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction single log")
 @pytest.mark.usefixtures("setup")
 class TestTC01:
-    @allure.title("Filter well with single log")
+    @allure.title("Verify Filter well with single log")
     def test_filter_single_log(self, setup, config):
         page = setup
         home_page = HomePage(page)

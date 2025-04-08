@@ -14,7 +14,7 @@ from utilities.random_utils import RandomUtils
 @allure.suite("GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("update user")
+    @allure.title("Verify user should be able to update user")
     def test_update_user(self, setup, config):
         page = setup
         home_page = HomePage(page)

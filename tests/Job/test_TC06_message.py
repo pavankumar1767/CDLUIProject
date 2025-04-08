@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction message")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with message")
+    @allure.title("Verify Filter well with message")
     def test_filter_message(self, setup, config):
         page = setup
         home_page = HomePage(page)

@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction Risk")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with Risk")
+    @allure.title("Verify Filter well with Risk")
     def test_filter_risk(self, setup, config):
         page = setup
         home_page = HomePage(page)

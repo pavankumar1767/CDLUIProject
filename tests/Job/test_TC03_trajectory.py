@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction trajectory")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with trajectory")
+    @allure.title("Verify Filter well with trajectory")
     def test_filter_trajectory(self, setup, config):
         page = setup
         home_page = HomePage(page)

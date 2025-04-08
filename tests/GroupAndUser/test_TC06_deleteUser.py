@@ -14,7 +14,7 @@ from utilities.random_utils import RandomUtils
 @allure.suite("GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC06:
-    @allure.title("delete user")
+    @allure.title("Verify user should be able to delete user")
     def test_delete_user(self, setup, config):
         page = setup
         home_page = HomePage(page)

@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction Cement")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with Cement")
+    @allure.title("Verify Filter well with Cement")
     def test_filter_cement(self, setup, config):
         page = setup
         home_page = HomePage(page)

@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction Mud log")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with Mud log")
+    @allure.title("Verify Filter well with Mud log")
     def test_filter_mudlog(self, setup, config):
         page = setup
         home_page = HomePage(page)

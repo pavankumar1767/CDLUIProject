@@ -22,11 +22,13 @@ def run_tests_and_send_email():
 
     # Define test cases to run
     test_cases = [
-        "tests/Filters/test_TC01_extractFilter.py",
-        "tests/Filters/test_TC02_saveFilter.py",
-        "tests/Filters/test_TC03_editFilter.py",
-        "tests/Filters/test_TC04_editExtractFilter.py",
-        "tests/Filters/test_TC05_negative_scenarios.py"
+        # "tests/Filters/test_TC01_extractFilter.py",
+        # "tests/Filters/test_TC02_saveFilter.py",
+        # "tests/Filters/test_TC03_editFilter.py",
+        # "tests/Filters/test_TC04_editExtractFilter.py",
+        # "tests/Filters/test_TC05_negative_scenarios.py",
+        "tests/Filters/test_TC06_loadFilter.py",
+
     ]
 
     # Run pytest with Allure
@@ -60,7 +62,7 @@ def run_tests_and_send_email():
     attachment_path = zip_allure_report(allure_report_dir)
 
     # List of recipients
-    recipients = ["pavan.karri@covalensedigital.com"]
+    recipients = ["pavan.karri@covalensedigital.com", "dasharathi.chakaravarthy@covalensedigital.com"]
 
     # Send the email
     send_email(subject, body, recipients, attachment_path)

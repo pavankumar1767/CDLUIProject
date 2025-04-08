@@ -67,7 +67,7 @@ def run_tests_and_send_email():
     attachment_path = zip_allure_report(allure_report_dir)
 
     # List of recipients
-    recipients = ["pavan.karri@covalensedigital.com"]
+    recipients = ["pavan.karri@covalensedigital.com", "dasharathi.chakaravarthy@covalensedigital.com"]
 
     # Send the email
     send_email(subject, body, recipients, attachment_path)

@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction formation marker")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with formation marker")
+    @allure.title("Verify Filter well with formation marker")
     def test_filter_formationMarker(self, setup, config):
         page = setup
         home_page = HomePage(page)

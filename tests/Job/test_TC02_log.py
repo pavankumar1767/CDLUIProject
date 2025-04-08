@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction multiple logs")
 @pytest.mark.usefixtures("setup")
 class TestTC02:
-    @allure.title("Filter well with multiple logs")
+    @allure.title("Verify Filter well with multiple logs")
     def test_filter_multiple_log(self, setup, config):
         page = setup
         home_page = HomePage(page)

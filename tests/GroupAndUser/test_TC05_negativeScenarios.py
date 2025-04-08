@@ -14,7 +14,7 @@ from utilities.DataStore import PropertyManager
 @allure.suite("Negative Scenarios GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC05:
-    @allure.title("delete Group associated to user")
+    @allure.title("Verify user should be able to delete Group associated to user")
     def test_delete_AssignedGroup(self, setup, config):
         page = setup
         home_page = HomePage(page)
@@ -36,7 +36,7 @@ class TestTC05:
         user_page.Button("Delete")
         filter_page.assert_popup(f"Group '{groupName}' is assigned to users and cannot be deleted.")
 
-    @allure.title("create Duplicate Group")
+    @allure.title("Verify user should not able to create Duplicate Group")
     def test_crate_duplicate_group(self, setup, config):
         page = setup
         home_page = HomePage(page)

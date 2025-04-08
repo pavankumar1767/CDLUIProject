@@ -13,7 +13,7 @@ from utilities.TestDataManager import TestDataManager
 @allure.suite("data extraction wellbore Geometry")
 @pytest.mark.usefixtures("setup")
 class TestTC03:
-    @allure.title("Filter well with wellbore Geometry")
+    @allure.title("Verify Filter well with wellbore Geometry")
     def test_filter_wellboreGeometry(self, setup, config):
         page = setup
         home_page = HomePage(page)
