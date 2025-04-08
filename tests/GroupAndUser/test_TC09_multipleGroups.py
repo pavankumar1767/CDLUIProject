@@ -17,7 +17,7 @@ from utilities.random_utils import RandomUtils
 @pytest.mark.usefixtures("setup")
 class TestTC09:
     @allure.title("Verify user is assigned to multiple group, Then user will have superior role access")
-    def test_crate_group(self, setup, config):
+    def test_create_group(self, setup, config):
         page = setup
         home_page = HomePage(page)
         login_page = LoginPage(page)

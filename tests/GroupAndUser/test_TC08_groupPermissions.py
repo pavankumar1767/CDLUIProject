@@ -17,7 +17,7 @@ from utilities.random_utils import RandomUtils
 @pytest.mark.usefixtures("setup")
 class TestTC08:
     @allure.title("Verify that user and Group Creation without filters permission")
-    def test_crate_group(self, setup, config):
+    def test_create_group(self, setup, config):
         page = setup
         home_page = HomePage(page)
         login_page = LoginPage(page)
