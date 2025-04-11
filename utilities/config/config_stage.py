@@ -3,5 +3,5 @@ class Config:
     username = "AutomationQA"
     password = "Abcd@1234"
     setpassword = "Abcd@1234"
-    loopCount = 10
+    loopCount = 100
 

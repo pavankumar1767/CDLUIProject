@@ -1,1 +1,0 @@
-Waiting for element: //table//tbody/tr/td[normalize-space()='Rodriguez_3']
