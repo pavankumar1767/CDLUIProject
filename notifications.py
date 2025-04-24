@@ -124,35 +124,8 @@ def run_tests_and_send_email():
 
     # Define test cases to run
     test_cases = [
-        "tests/Login/test_Login.py",
-        "tests/GroupAndUser/test_TC01_createGroup.py",
-        "tests/GroupAndUser/test_TC02_createUser.py",
-        "tests/GroupAndUser/test_TC03_updateUser.py",
-        "tests/GroupAndUser/test_TC04_dataExtraction.py",
-        "tests/GroupAndUser/test_TC06_negativeScenarios.py",
-        "tests/GroupAndUser/test_TC07_deleteUser.py",
-        "tests/GroupAndUser/test_TC08_deleteGroup.py",
-        "tests/GroupAndUser/test_TC09_groupPermissions.py",
-        "tests/GroupAndUser/test_TC10_multipleGroups.py",
-        "tests/Filters/test_TC01_extractFilter.py",
-        "tests/Filters/test_TC02_saveFilter.py",
-        "tests/Filters/test_TC03_editFilter.py",
-        "tests/Filters/test_TC04_editExtractFilter.py",
-        "tests/Filters/test_TC05_negative_scenarios.py",
-        "tests/Job/test_TC01_log.py",
-        "tests/Job/test_TC02_log.py",
-        "tests/Job/test_TC03_trajectory.py",
-        "tests/Job/test_TC04_wellboreGeometry.py",
-        "tests/Job/test_TC05_rig.py",
-        "tests/Job/test_TC06_message.py",
-        "tests/Job/test_TC07_formationMarker.py",
-        "tests/Job/test_TC08_mudlog.py",
-        "tests/Job/test_TC09_cement.py",
-        "tests/Job/test_TC10_risk.py",
-        "tests/Job/test_TC11_bharun.py",
-        "tests/Job/test_TC12_target.py",
-        "tests/Job/test_TC13_singlelogcurve.py",
-        "tests/Job/test_TC14_singleRigObject.py",
+        "tests/Notifications/test_TC01_addNotifyUser.py",
+
 
     ]
 
@@ -187,7 +160,7 @@ def run_tests_and_send_email():
     attachment_path = zip_allure_report(allure_report_dir)
 
     # List of recipients
-    recipients = ["pavan.karri@covalensedigital.com", "dasharathi.chakaravarthy@covalensedigital.com"]
+    recipients = ["pavan.karri@covalensedigital.com"]
 
     # Send the email
     send_email(subject, body, recipients, attachment_path)

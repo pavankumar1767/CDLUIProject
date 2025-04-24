@@ -8,6 +8,7 @@ from pages.home_page import HomePage
 from pages.job_page import JobPage
 from pages.login_page import LoginPage
 from utilities.TestDataManager import TestDataManager
+from utilities.random_utils import RandomUtils
 
 
 @allure.suite("data extraction single log")
@@ -20,6 +21,7 @@ class TestTC01:
         login_page = LoginPage(page)
         filter_page = FilterPage(page)
         job_page = JobPage(page)
+
 
         login_page.navigate(config.BASE_URL)
         login_page.enter_username(config.username)

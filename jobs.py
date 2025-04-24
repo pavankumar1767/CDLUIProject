@@ -34,7 +34,8 @@ def run_tests_and_send_email():
         "tests/Job/test_TC11_bharun.py",
         "tests/Job/test_TC12_target.py",
         "tests/Job/test_TC13_singlelogcurve.py",
-        "tests/Job/test_TC14_singleRigObject.py",    ]
+        "tests/Job/test_TC14_singleRigObject.py",
+        ]
 
     # Run pytest with Allure
     pytest_command = f"pytest -v -s --alluredir={report_dir} {' '.join(test_cases)}"

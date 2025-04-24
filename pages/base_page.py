@@ -39,15 +39,49 @@ class BasePage:
         self.page.fill(selector, text)
         self._capture_screenshot(f"After Filling {text} into element: {element_name}")
 
+    # def get_text(self, selector, element_name="Element"):
+    #     log_message = f"Retrieving text from element: {element_name}"
+    #     logger.info(log_message)
+    #     _attach_log_to_allure(log_message)
+    #     self.page.wait_for_selector(selector)
+    #     time.sleep(5)
+    #     text = self.page.locator(selector).text_content()
+    #     self._capture_screenshot(f"{text} Text Retrieved from {element_name}")
+    #     return text.strip()
     def get_text(self, selector, element_name="Element"):
-        log_message = f"Retrieving text from element: {element_name}"
+        log_message = f"Retrieving text from element(s): {element_name}"
         logger.info(log_message)
         _attach_log_to_allure(log_message)
+
+        # Wait for at least one element to appear
         self.page.wait_for_selector(selector)
-        time.sleep(5)
-        text = self.page.locator(selector).text_content()
-        self._capture_screenshot(f"{text} Text Retrieved from {element_name}")
-        return text.strip()
+
+        # Get locator object
+        elements = self.page.locator(selector)
+
+        if elements.count() == 1:
+            # Single element case
+            text = elements.text_content()
+            cleaned_text = text.strip() if text else ""
+            self._capture_screenshot(f"{cleaned_text} Text Retrieved from {element_name}")
+
+            # Log in Allure
+            _attach_log_to_allure(f"Text retrieved from {element_name}: '{cleaned_text}'")
+            return cleaned_text
+
+        else:
+            # Multiple elements case
+            texts = elements.all_text_contents()
+            stripped_texts = [text.strip() for text in texts if text]
+
+            if stripped_texts:
+                self._capture_screenshot(f"{element_name} - Text Retrieved: {stripped_texts[0]}")
+                # Log all texts in Allure
+                _attach_log_to_allure(f"Texts retrieved from {element_name}: {stripped_texts}")
+            else:
+                _attach_log_to_allure(f"No text found for {element_name}")
+
+            return stripped_texts
 
     def wait_for_selector(self, selector):
         log_message = f"Waiting for element: {selector}"

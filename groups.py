@@ -33,11 +33,11 @@ def run_tests_and_send_email():
         "tests/GroupAndUser/test_TC02_createUser.py",
         "tests/GroupAndUser/test_TC03_updateUser.py",
         "tests/GroupAndUser/test_TC04_dataExtraction.py",
-        "tests/GroupAndUser/test_TC05_negativeScenarios.py",
-        "tests/GroupAndUser/test_TC06_deleteUser.py",
-        "tests/GroupAndUser/test_TC07_deleteGroup.py",
-        "tests/GroupAndUser/test_TC08_groupPermissions.py",
-        "tests/GroupAndUser/test_TC09_multipleGroups.py",    ]
+        "tests/GroupAndUser/test_TC06_negativeScenarios.py",
+        "tests/GroupAndUser/test_TC07_deleteUser.py",
+        "tests/GroupAndUser/test_TC08_deleteGroup.py",
+        "tests/GroupAndUser/test_TC09_groupPermissions.py",
+        "tests/GroupAndUser/test_TC10_multipleGroups.py",    ]
 
     # Run pytest with Allure
     pytest_command = f"pytest -v -s --alluredir={report_dir} {' '.join(test_cases)}"

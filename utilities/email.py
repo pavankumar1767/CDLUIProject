@@ -51,13 +51,12 @@ def send_email(subject, body, to_email, attachment_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-
 def parse_allure_report(report_dir):
     """
     Parses the Allure report to get detailed test results.
 
     :param report_dir: Path to the Allure report directory.
-    :return: A tuple containing the number of passed tests, failed tests, broken tests, and a list of test details.
+    :return: A tuple containing the number of passed tests, failed tests, broken tests, total tests, and a list of test details.
     """
     passed_tests = 0
     failed_tests = 0
@@ -72,21 +71,24 @@ def parse_allure_report(report_dir):
     # Iterate through all JSON files in the report directory
     for filename in os.listdir(report_dir):
         if filename.endswith(".json"):
-            with open(os.path.join(report_dir, filename), "r") as file:
-                data = json.load(file)
-                status = data.get("status", "unknown")
-                name = data.get("name", "Unnamed Test")
+            try:
+                with open(os.path.join(report_dir, filename), "r", encoding="utf-8") as file:
+                    data = json.load(file)
+                    status = data.get("status", "unknown")
+                    name = data.get("name", "Unnamed Test")
 
-                total_tests += 1  # Increment total tests count
+                    total_tests += 1  # Increment total tests count
 
-                if status == "passed":
-                    passed_tests += 1
-                elif status == "failed":
-                    failed_tests += 1
-                elif status == "broken":
-                    broken_tests += 1
+                    if status == "passed":
+                        passed_tests += 1
+                    elif status == "failed":
+                        failed_tests += 1
+                    elif status == "broken":
+                        broken_tests += 1
 
-                # Add test details to the list
-                test_details.append(f"{name}: {status}")
+                    test_details.append(f"{name}: {status}")
+
+            except Exception as e:
+                print(f"⚠️ Failed to read {filename}: {e}")
 
     return passed_tests, failed_tests, broken_tests, total_tests, test_details

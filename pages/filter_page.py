@@ -129,15 +129,36 @@ class FilterPage(BasePage):
         is_disabled = element.is_disabled()
         assert is_disabled, f"Button '{button_text}' is not disabled."
 
+    # def deselectAll_objects(self, data_object):
+    #     input_locator = self.page.locator(
+    #         f"//mat-panel-title[normalize-space()='{data_object}']//ancestor::mat-expansion-panel/div"
+    #         "//mat-checkbox//span[contains(normalize-space(), 'Select All')]"
+    #         "/preceding-sibling::span//input"
+    #     )
+    #     aria_checked = input_locator.get_attribute("aria-checked")
+    #     if aria_checked == "true":
+    #         element_xpath = f"//mat-panel-title[normalize-space()='{data_object}']//ancestor::mat-expansion-panel/div//mat-checkbox//span[contains(normalize-space(), 'Select All')]"
+    #         self.click(element_xpath, f"{data_object} select all")
+    #     else:
+    #         assert False, f"Test failed: '{data_object}' checkbox is not in the checked state."
+
     def deselectAll_objects(self, data_object):
+        # Determine the correct label based on object type
+        select_text = "Select All Logs" if data_object == "Logs" else "Select All"
+
+        # Updated locator with dynamic label text
         input_locator = self.page.locator(
             f"//mat-panel-title[normalize-space()='{data_object}']//ancestor::mat-expansion-panel/div"
-            "//mat-checkbox//span[contains(normalize-space(), 'Select All')]"
-            "/preceding-sibling::span//input"
+            f"//mat-checkbox//span[contains(normalize-space(), '{select_text}')]/preceding-sibling::span//input"
         )
+
+        # Check if it's selected and deselect if needed
         aria_checked = input_locator.get_attribute("aria-checked")
         if aria_checked == "true":
-            element_xpath = f"//mat-panel-title[normalize-space()='{data_object}']//ancestor::mat-expansion-panel/div//mat-checkbox//span[contains(normalize-space(), 'Select All')]"
+            element_xpath = (
+                f"//mat-panel-title[normalize-space()='{data_object}']//ancestor::mat-expansion-panel/div"
+                f"//mat-checkbox//span[contains(normalize-space(), '{select_text}')]"
+            )
             self.click(element_xpath, f"{data_object} select all")
         else:
             assert False, f"Test failed: '{data_object}' checkbox is not in the checked state."
@@ -257,4 +278,17 @@ class FilterPage(BasePage):
         element_xpath = "//input[@data-placeholder = 'Search by Filter name']"
         self.fill(element_xpath,text,f"{text}")
 
+    def enterNotifyUser(self, user_list: list):
+        for user_name in user_list:
+            element_xpath = "//input[@ng-reflect-placeholder='Select or type a user']"
+            self.fill(element_xpath, user_name, f"{user_name}")
+            self.Button("Add")
+
+    def selectNotifyUsers(self, user_list: list):
+        for user_name in user_list:
+            element_xpath = "//input[@ng-reflect-placeholder='Select or type a user']"
+            selectuser_xpath = f"//div[@role='listbox']/mat-option/span[normalize-space()='{user_name}']"
+            self.click(element_xpath, "clicked on Notify user")
+            self.click(selectuser_xpath, f"{user_name}")
+            self.Button("Add")
 

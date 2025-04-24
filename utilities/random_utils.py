@@ -26,7 +26,7 @@ class RandomUtils:
     def get_email():
         fname = faker.first_name()
         lname = faker.last_name()
-        email_domains = ["@yopmail.com"]
+        email_domains = ["@gmail.com"]
         selected_domain = random.choice(email_domains)
         email = f"{fname}{lname}{random.randint(0, 99999)}{selected_domain}"
         return email

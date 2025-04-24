@@ -49,6 +49,8 @@ class TestTC02:
         PropertyManager.set_property("userName", userName)
         PropertyManager.set_property("firstName", firstName)
         PropertyManager.set_property("lastName", lastName)
+        PropertyManager.set_property("Email", email)
+
 
 
 

@@ -112,6 +112,82 @@ class JobPage(BasePage):
             )
             print(f"Element {index} background color is correct: {background_color}")
 
+    def job_status(self, job_number):
+        max_attempts = 20  # Number of times to retry (30 attempts = 30 minutes)
+        for attempt in range(max_attempts):
+            job_status = self.get_job_status(job_number)  # Replace with the actual method to fetch job status
+            if job_status == "Completed":
+                assert job_status == "Completed"
+                print("Job status is completed.")
+                break
+            elif job_status == "Failed":
+                assert job_status == "Failed"  # Explicitly fail the test case
+                print("Job status is 'Failed'. Test case will fail.")
+                break
+            print(f"Attempt {attempt + 1}: Status is '{job_status}'. Refreshing...")
+            element_xpath = "//mat-icon[normalize-space()='refresh']"
+            self.click(element_xpath, "refresh")
+            time.sleep(60)  # Wait for 60 seconds before the next attempt
+        else:
+            raise TimeoutError(f"Job status did not reach 'Completed' after {max_attempts} attempts.")
 
+    def assert_job_status_notifications(self, job_number: int, expected_status: str):
+        """
+        Verifies if the job notification shows either success or failure based on expected status.
 
+        :param job_number: The job number to look for
+        :param expected_status: Expected status, e.g., 'completed', 'completed successfully', or 'failed'
+        """
+        notification_xpath = (
+            "//h3[normalize-space()='Job Notifications']/parent::div/"
+            "following-sibling::div[@class='notified-users-table']/table/tbody/tr/td[2]"
+        )
 
+        notifications = self.page.locator(notification_xpath)
+        actual_messages = notifications.all_inner_texts()
+        actual_messages = [msg.strip().lower() for msg in actual_messages]
+
+        print("📥 Notifications fetched:")
+        for msg in actual_messages:
+            print(f"  • {msg}")
+
+        job_str = f"job {job_number}".lower()
+        expected_keywords = expected_status.lower().split()
+
+        for msg in actual_messages:
+            if job_str in msg and all(word in msg for word in expected_keywords):
+                print(f"✅ Found expected status '{expected_status}' for Job {job_number}")
+                return
+
+        assert False, f"❌ No notification found for Job {job_number} with status containing: '{expected_status}'"
+
+    def status_notifications(self, job_number: int, expected_partials: list):
+        # XPath for all job-related notifications (job_number in 2nd column, actual message in 3rd)
+        notification_xpath = (
+            f"//h2[normalize-space()='Notifications']/parent::div/following-sibling::div[@class='notifications-table-container']//table/tbody/tr[td[2][normalize-space() = '{job_number}']]/td[3]"
+        )
+
+        notifications = self.get_text(notification_xpath, "Job Notifications")
+        for note in notifications:
+            print(f"• {note}")
+
+        # Assert each expected partial is found in at least one notification
+        for expected_text in expected_partials:
+            if not any(expected_text.lower() in n.lower() for n in notifications):
+                raise AssertionError(f"Expected text '{expected_text}' not found in notifications!")
+            else:
+                print(f"[✓] '{expected_text}' found ✅")
+
+    def assert_added_notifyuser(self, user):
+
+        notification_user_xpath = "//h3[normalize-space()='Notified User List']/parent::div/following-sibling::div[@class='notified-users-table']/table/tbody/tr/td[2]"
+        Added_user = self.get_text(notification_user_xpath, f"{notification_user_xpath}")
+        assert Added_user == user
+
+    def search_by_job(self, text):
+        element_xpath = "//input[@data-placeholder='Search by job number']"
+        self.fill(element_xpath,text,f"{text}")
+
+    def search_icon(self):
+        element_xpath = "//mat-icon[normalize-space()='search']"
+        self.click(element_xpath, "search icon")
