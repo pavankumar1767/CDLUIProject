@@ -1,0 +1,1 @@
+Retrieving text from element(s): SND 14 23 FED COM 001 P26 225H wellbore name
