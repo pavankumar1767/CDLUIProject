@@ -82,6 +82,19 @@ class JobPage(BasePage):
                 f"but found '{background_color}'."
         )
 
+    def assert_logdata_failed_intowitsml(self, well, wellbore, log: list):
+        element_xpath = f"(//button[contains(normalize-space(),'{well}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]/parent::li/ul/li/span[contains(normalize-space(),'Log')])[1]/span[normalize-space()='+']"
+        self.click(element_xpath, "open log")
+        for logs in log:
+            element_xpath_log = f"(//button[contains(normalize-space(),'{well}')]/parent::h2/following-sibling::div//span[contains(normalize-space(),'{wellbore}')]/parent::li/ul/li/span[contains(normalize-space(),'Log')]/parent::li/ul/li[contains(normalize-space(),'{logs}')]/span)[2]"
+            color_dot = self.page.locator(element_xpath_log)
+            background_color = color_dot.evaluate("element => getComputedStyle(element).backgroundColor")
+            expected_green_color = "rgb(249, 102, 102)"  # Update this if the green color code differs
+            assert background_color == expected_green_color, (
+                f"Test failed: Expected Red color '{expected_green_color}', "
+                f"but found '{background_color}'."
+        )
+
     def assert_data_intowitsml(self, object_name, well, wellbore):
         # Click to open the log based on well, wellbore, and object_name
         element_xpath = (
@@ -277,3 +290,29 @@ class JobPage(BasePage):
     def search_icon(self):
         element_xpath = "//mat-icon[normalize-space()='search']"
         self.click(element_xpath, "search icon")
+
+
+    def assert_job_failed_due_to_config(self, job_number):
+
+        max_attempts = 20  # Number of times to retry (30 attempts = 30 minutes)
+        for attempt in range(max_attempts):
+            job_status = self.get_job_status(job_number)  # Replace with the actual method to fetch job status
+            if job_status == "Failed":
+                assert job_status == "Failed"  # Explicitly fail the test case
+                print("Job status is 'Failed'")
+                break
+            elif job_status == "Completed":
+                assert job_status == "Completed"
+                print("Job status is completed. Test case will fail")
+                raise AssertionError(f"Job status is 'Completed'.")
+            print(f"Attempt {attempt + 1}: Status is '{job_status}'. Refreshing...")
+            element_xpath = "//mat-icon[normalize-space()='refresh']"
+            self.click(element_xpath, "refresh")
+            time.sleep(60)  # Wait for 60 seconds before the next attempt
+        else:
+            raise TimeoutError(f"Job status did not reach 'Failed' after {max_attempts} attempts.")
+
+    def get_error_msg(self):
+        element_xpath = "//p[@class='error-msg']"
+        text = self.get_text(element_xpath, "error message")
+        return text

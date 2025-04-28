@@ -1,6 +1,9 @@
 import time
 
-from pages.base_page import BasePage
+import allure
+
+from pages.base_page import BasePage, logger
+
 
 
 class SettingPage(BasePage):
@@ -21,6 +24,11 @@ class SettingPage(BasePage):
         element_xpath = f"//input[@ng-reflect-name='{name}']"
         self.fill(element_xpath,text , f"{text}")
 
+    def clear_input_text(self, name):
+        element_xpath = f"//input[@ng-reflect-name='{name}']"
+        input_element = self.page.locator(element_xpath)
+        input_element.clear()
+
 
 
     def select_checkbox(self, field):
@@ -34,5 +42,20 @@ class SettingPage(BasePage):
             self.click(clickable_xpath, f"{field} - Rechecking")
         else:
             self.click(clickable_xpath, f"{field} - Checking")
+
+    def assert_url_filed_error(self, text):
+        log_message = f"Asserting field level error: {text}"
+        logger.info(log_message)
+        allure.attach(log_message, name="error Assertion Log", attachment_type=allure.attachment_type.TEXT)
+
+        popup_locator = self.page.get_by_text(text)
+        popup_locator.wait_for(state="visible", timeout=10000)  # 10 seconds timeout
+        popup_text = popup_locator.text_content()
+
+        allure.attach(popup_text, name="error Text", attachment_type=allure.attachment_type.TEXT)
+        self._capture_screenshot("error Displayed")
+
+        assert text == popup_text, f"Expected error text: '{text}', but got: '{popup_text}'"
+
 
 

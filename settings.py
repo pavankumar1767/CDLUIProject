@@ -22,7 +22,7 @@ def run_tests_and_send_email():
     # Define test cases to run
     test_cases = [
         "tests/Settings/test_TC01_settings.py",
-
+        "tests/Settings/test_TC02_negativeScenarios.py",
 
     ]
 

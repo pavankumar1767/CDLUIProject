@@ -14,7 +14,7 @@ from utilities.DataStore import PropertyManager
 @allure.suite("Negative Scenarios GroupAndUser Management")
 @pytest.mark.usefixtures("setup")
 class TestTC06:
-    @allure.title("Verify user should be able to delete Group associated to user")
+    @allure.title("Verify user should not be able to delete Group associated to user")
     def test_delete_AssignedGroup(self, setup, config):
         page = setup
         home_page = HomePage(page)
@@ -57,6 +57,21 @@ class TestTC06:
         user_page.input("group_name", groupName)
         group_page.Button_2("Add")
         filter_page.assert_popup(f"A group with the name '{groupName}' already exists.")
+
+    @allure.title("Verify that in profile Group and Access token are non editable")
+    def test_group_token_readonly(self, setup, config):
+        page = setup
+        login_page = LoginPage(page)
+
+        login_page.navigate(config.BASE_URL)
+        login_page.enter_username(PropertyManager.get_property("userName"))
+        login_page.enter_password(config.setpassword)
+        login_page.click_login("Sign In")
+
+        login_page.profile()
+        login_page.assert_group_token()
+
+
 
 
 

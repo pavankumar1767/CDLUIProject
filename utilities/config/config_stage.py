@@ -15,4 +15,5 @@ class Config:
     Client_secret_id = "_ng8Q~zkBdgFlkpsh7hnZJavXL6ypDN1iWb1vcX8"
     Email_address = "testuser78335901@gmail.com"
     Email_token = "wdrvtobvtvdakphg"
+    Teams_webhook_url = ""
 

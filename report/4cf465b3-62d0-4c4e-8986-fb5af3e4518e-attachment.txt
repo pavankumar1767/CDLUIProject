@@ -1,0 +1,1 @@
+Texts retrieved from Job Notifications: ['Job 816 completed successfully with 1 well', 'New job 816 started with 1 well']

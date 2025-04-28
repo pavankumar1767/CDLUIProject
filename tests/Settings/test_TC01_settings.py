@@ -70,7 +70,6 @@ class TestTC01:
         login_page = LoginPage(page)
         filter_page = FilterPage(page)
         setting_page = SettingPage(page)
-        user_page = UserPage(page)
 
         login_page.navigate(config.BASE_URL)
         login_page.enter_username(config.username)
@@ -83,6 +82,8 @@ class TestTC01:
         setting_page.select_checkbox("notify_email")
         setting_page.input("email_address", config.Email_address)
         setting_page.input("email_token", config.Email_token)
+        setting_page.select_checkbox("notify_teams")
+        setting_page.input("teams_url", config.Teams_webhook_url)
         filter_page.Button("Save")
         filter_page.assert_popup("Notification settings updated successfully.")
 
