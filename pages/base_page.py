@@ -243,30 +243,41 @@ class BasePage:
     def navigate(self, url):
         log_message = f"Navigating to URL: {url}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Navigation")
+        _attach_log_to_allure(log_message)
         self.page.goto(url)
         self._capture_screenshot("After Navigation")
 
     def click(self, selector, element_name="Element"):
-        log_message = f"Clicking on element: {element_name}"
-        logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Click Action")
         self.page.wait_for_selector(selector)
         self.page.click(selector)
+        log_message = f"After Clicking on element: {element_name}"
+        logger.info(log_message)
+        _attach_log_to_allure(log_message)
         self._capture_screenshot(f"After Clicking {element_name}")
 
     def fill(self, selector, text, element_name="Element"):
         log_message = f"Filling text '{text}' into element: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Input")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self.page.fill(selector, text)
         self._capture_screenshot(f"After Filling {text} into {element_name}")
 
     def get_text(self, selector, element_name="Element"):
+        log_message = f"Retrieving text from element: {element_name}"
+        logger.info(log_message)
+        _attach_log_to_allure(log_message)
+        self.page.wait_for_selector(selector)
+        time.sleep(5)
+        text = self.page.locator(selector).text_content()
+        _attach_log_to_allure(f"{text} Text Retrieved from {element_name}")
+        self._capture_screenshot(f"{text} Text Retrieved from {element_name}")
+        return text.strip()
+
+    def get_text_list(self, selector, element_name="Element"):
         log_message = f"Retrieving text from element(s): {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Get Text")
+        _attach_log_to_allure(log_message)
 
         self.page.wait_for_selector(selector)
         elements = self.page.locator(selector)
@@ -290,14 +301,14 @@ class BasePage:
     def wait_for_selector(self, selector):
         log_message = f"Waiting for element: {selector}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Wait")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self._capture_screenshot(f"After Waiting for {selector}")
 
     def select_from_dropdown(self, selector, value, element_name="Dropdown"):
         log_message = f"Selecting value '{value}' from dropdown: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Dropdown Selection")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self.page.select_option(selector, value)
         self._capture_screenshot(f"After Selecting {value} from {element_name}")
@@ -308,7 +319,7 @@ class BasePage:
         if prompt_text:
             log_message += f" with prompt text: {prompt_text}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Alert Handling")
+        _attach_log_to_allure(log_message)
         if prompt_text:
             self.page.on('dialog', lambda dialog: dialog.accept(prompt_text))
         else:
@@ -318,7 +329,7 @@ class BasePage:
     def upload_file(self, selector, file_path, element_name="File Input"):
         log_message = f"Uploading file '{file_path}' to element: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="File Upload")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self.page.set_input_files(selector, file_path)
         self._capture_screenshot(f"After Uploading File to {element_name}")
@@ -326,7 +337,7 @@ class BasePage:
     def download_file(self, selector, download_path, element_name="Download Link"):
         log_message = f"Downloading file from element: {element_name} to {download_path}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="File Download")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         with self.page.expect_download() as download_info:
             self.page.click(selector)
@@ -337,7 +348,7 @@ class BasePage:
     def hover(self, selector, element_name="Element"):
         log_message = f"Hovering over element: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Hover Action")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self.page.hover(selector)
         self._capture_screenshot(f"After Hovering over {element_name}")
@@ -345,7 +356,7 @@ class BasePage:
     def double_click(self, selector, element_name="Element"):
         log_message = f"Double-clicking on element: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Double Click")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self.page.dblclick(selector)
         self._capture_screenshot(f"After Double-Clicking {element_name}")
@@ -353,7 +364,7 @@ class BasePage:
     def right_click(self, selector, element_name="Element"):
         log_message = f"Right-clicking on element: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Right Click")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self.page.click(selector, button="right")
         self._capture_screenshot(f"After Right-Clicking {element_name}")
@@ -361,7 +372,7 @@ class BasePage:
     def drag_and_drop(self, source_selector, target_selector, source_name="Source Element", target_name="Target Element"):
         log_message = f"Dragging element: {source_name} and dropping onto element: {target_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Drag and Drop")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(source_selector)
         self.page.wait_for_selector(target_selector)
         self.page.drag_and_drop(source_selector, target_selector)
@@ -370,7 +381,7 @@ class BasePage:
     def scroll_to_element(self, selector, element_name="Element"):
         log_message = f"Scrolling to element: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Scroll")
+        _attach_log_to_allure(log_message)
         self.page.wait_for_selector(selector)
         self.page.locator(selector).scroll_into_view_if_needed()
         self._capture_screenshot(f"After Scrolling to {element_name}")
@@ -378,14 +389,14 @@ class BasePage:
     def press_key(self, key):
         log_message = f"Pressing key: {key}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Key Press")
+        _attach_log_to_allure(log_message)
         self.page.keyboard.press(key)
         self._capture_screenshot(f"After Pressing Key: {key}")
 
     def select_checkbox(self, selector, element_name="Checkbox"):
         log_message = f"Selecting checkbox: {element_name}"
         logger.info(log_message)
-        _attach_log_to_allure(log_message, label="Checkbox Selection")
+        _attach_log_to_allure(log_message)
         try:
             self.page.wait_for_selector(selector, state="visible", timeout=60000)
             if not self.page.is_checked(selector):

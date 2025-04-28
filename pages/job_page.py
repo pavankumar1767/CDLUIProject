@@ -131,52 +131,138 @@ class JobPage(BasePage):
         else:
             raise TimeoutError(f"Job status did not reach 'Completed' after {max_attempts} attempts.")
 
-    def assert_job_status_notifications(self, job_number: int, expected_status: str):
-        """
-        Verifies if the job notification shows either success or failure based on expected status.
+    # def assert_job_status_notifications(self, job_number: int, expected_status: str):
+    #     """
+    #     Verifies if the job notification shows either success or failure based on expected status.
+    #
+    #     :param job_number: The job number to look for
+    #     :param expected_status: Expected status, e.g., 'completed', 'completed successfully', or 'failed'
+    #     """
+    #     notification_xpath = (
+    #         "//h3[normalize-space()='Job Notifications']/parent::div/"
+    #         "following-sibling::div[@class='notified-users-table']/table/tbody/tr/td[2]"
+    #     )
+    #
+    #     notifications = self.page.locator(notification_xpath)
+    #     actual_messages = notifications.all_inner_texts()
+    #     actual_messages = [msg.strip().lower() for msg in actual_messages]
+    #
+    #     print("📥 Notifications fetched:")
+    #     for msg in actual_messages:
+    #         print(f"  • {msg}")
+    #
+    #     job_str = f"job {job_number}".lower()
+    #     expected_keywords = expected_status.lower().split()
+    #
+    #     for msg in actual_messages:
+    #         if job_str in msg and all(word in msg for word in expected_keywords):
+    #             print(f"✅ Found expected status '{expected_status}' for Job {job_number}")
+    #             return
+    #
+    #     assert False, f"❌ No notification found for Job {job_number} with status containing: '{expected_status}'"
 
-        :param job_number: The job number to look for
-        :param expected_status: Expected status, e.g., 'completed', 'completed successfully', or 'failed'
-        """
-        notification_xpath = (
-            "//h3[normalize-space()='Job Notifications']/parent::div/"
-            "following-sibling::div[@class='notified-users-table']/table/tbody/tr/td[2]"
-        )
 
-        notifications = self.page.locator(notification_xpath)
-        actual_messages = notifications.all_inner_texts()
-        actual_messages = [msg.strip().lower() for msg in actual_messages]
+    # def assert_job_status_notifications(self, job_number: int, expected_partials: list):
+    #     # XPath for all job-related notifications (job_number in 2nd column, actual message in 3rd)
+    #     notification_xpath = "//h3[normalize-space()='Job Notifications']/parent::div/following-sibling::div[@class='notified-users-table']/table/tbody/tr/td[2]"
+    #
+    #     notifications = self.get_text_list(notification_xpath, "Job Notifications")
+    #     for note in notifications:
+    #         print(f"• {note}")
+    #
+    #     # Assert each expected partial is found in at least one notification
+    #     for expected_text in expected_partials:
+    #         if not any(expected_text.lower() in n.lower() for n in notifications):
+    #             raise AssertionError(f"Expected text '{expected_text}' not found in notifications!")
+    #         else:
+    #             print(f"[✓] '{expected_text}' found ✅")
 
-        print("📥 Notifications fetched:")
-        for msg in actual_messages:
-            print(f"  • {msg}")
+    def assert_job_status_notifications(self, job_number: int, expected_partials: list, require_all=True):
 
-        job_str = f"job {job_number}".lower()
-        expected_keywords = expected_status.lower().split()
+        # XPath for job notifications
+        notification_xpath = "//h3[normalize-space()='Job Notifications']/parent::div/following-sibling::div[@class='notified-users-table']/table/tbody/tr/td[2]"
 
-        for msg in actual_messages:
-            if job_str in msg and all(word in msg for word in expected_keywords):
-                print(f"✅ Found expected status '{expected_status}' for Job {job_number}")
-                return
+        notifications = self.get_text_list(notification_xpath, "Job Notifications")
 
-        assert False, f"❌ No notification found for Job {job_number} with status containing: '{expected_status}'"
+        # Print found notifications for debugging
+        print(f"\nFound {len(notifications)} notifications for job {job_number}:")
+        for i, note in enumerate(notifications, 1):
+            print(f"{i}. {note}")
+
+        if require_all:
+            # STRICT MODE: All expected messages must be present
+            missing = [msg for msg in expected_partials
+                       if not any(msg.lower() in n.lower() for n in notifications)]
+
+            if missing:
+                raise AssertionError(
+                    f"Missing required notifications for job {job_number}:\n"
+                    f"Expected ALL of: {expected_partials}\n"
+                    f"Missing: {missing}\n"
+                    f"Actual notifications: {notifications}"
+                )
+            print(f"[✓] All expected notifications found: {expected_partials}")
+        else:
+            # LENIENT MODE: At least one expected message must be present
+            found = [msg for msg in expected_partials
+                     if any(msg.lower() in n.lower() for n in notifications)]
+
+            if not found:
+                raise AssertionError(
+                    f"No expected notifications found for job {job_number}:\n"
+                    f"Expected ANY of: {expected_partials}\n"
+                    f"Actual notifications: {notifications}"
+                )
+            print(f"[✓] Found expected notifications: {found}")
+
+    # def status_notifications(self, job_number: int, expected_partials: list):
+    #     # XPath for all job-related notifications (job_number in 2nd column, actual message in 3rd)
+    #     notification_xpath = (
+    #         f"//h2[normalize-space()='Notifications']/parent::div/following-sibling::div[@class='notifications-table-container']//table/tbody/tr[td[2][normalize-space() = '{job_number}']]/td[3]"
+    #     )
+    #
+    #     notifications = self.get_text_list(notification_xpath, "Job Notifications")
+    #     for note in notifications:
+    #         print(f"• {note}")
+    #
+    #     # Assert each expected partial is found in at least one notification
+    #     for expected_text in expected_partials:
+    #         if not any(expected_text.lower() in n.lower() for n in notifications):
+    #             raise AssertionError(f"Expected text '{expected_text}' not found in notifications!")
+    #         else:
+    #             print(f"[✓] '{expected_text}' found ✅")
 
     def status_notifications(self, job_number: int, expected_partials: list):
-        # XPath for all job-related notifications (job_number in 2nd column, actual message in 3rd)
+
+        # XPath for job notifications
         notification_xpath = (
-            f"//h2[normalize-space()='Notifications']/parent::div/following-sibling::div[@class='notifications-table-container']//table/tbody/tr[td[2][normalize-space() = '{job_number}']]/td[3]"
+            f"//h2[normalize-space()='Notifications']/parent::div/following-sibling::div"
+            f"[@class='notifications-table-container']//table/tbody/"
+            f"tr[td[2][normalize-space() = '{job_number}']]/td[3]"
         )
 
-        notifications = self.get_text(notification_xpath, "Job Notifications")
-        for note in notifications:
-            print(f"• {note}")
+        notifications = self.get_text_list(notification_xpath, "Job Notifications")
 
-        # Assert each expected partial is found in at least one notification
-        for expected_text in expected_partials:
-            if not any(expected_text.lower() in n.lower() for n in notifications):
-                raise AssertionError(f"Expected text '{expected_text}' not found in notifications!")
-            else:
-                print(f"[✓] '{expected_text}' found ✅")
+        # Print all found notifications for debugging
+        print(f"\nFound {len(notifications)} notifications for job {job_number}:")
+        for i, note in enumerate(notifications, 1):
+            print(f"{i}. {note}")
+
+        # Check ALL expected texts are present in ANY notification
+        missing_messages = [
+            msg for msg in expected_partials
+            if not any(msg.lower() in n.lower() for n in notifications)
+        ]
+
+        if missing_messages:
+            raise AssertionError(
+                f"Missing expected notifications:\n"
+                f"Expected: {expected_partials}\n"
+                f"Missing: {missing_messages}\n"
+                f"Actual notifications: {notifications}"
+            )
+
+        print(f"[✓] All expected notifications found: {expected_partials}")
 
     def assert_added_notifyuser(self, user):
 

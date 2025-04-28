@@ -1,1 +1,0 @@
-Text retrieved from SND 14 23 FED COM 001 P26 225H wellbore name: 'PV7738-00'

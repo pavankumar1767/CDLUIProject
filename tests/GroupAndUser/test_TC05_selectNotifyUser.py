@@ -26,6 +26,7 @@ class TestTC05:
         user = f"{PropertyManager.get_property("firstName")} {PropertyManager.get_property("lastName")}"
         email = PropertyManager.get_property("Email")
 
+
         login_page.navigate(config.BASE_URL)
         login_page.enter_username(config.username)
         login_page.enter_password(config.password)
@@ -69,13 +70,17 @@ class TestTC05:
         filter_page.select_object(data_Object)
         job_page.assert_objects_checkbox_disabled(data_Object)
         if job_status == "Completed":
-            job_page.assert_job_status_notifications(job_id, expected_status="completed successfully")
+            expected_partials = ["completed successfully", f"New job {job_id} started"]
+            job_page.assert_job_status_notifications(job_id, expected_partials)
         elif job_status == "Failed":
-            job_page.assert_job_status_notifications(job_id, expected_status="failed")
+            expected_partials = ["failed", f"New job {job_id} started"]
+            job_page.assert_job_status_notifications(job_id, expected_partials)
         else:
             print(f"⏳ Job {job_id} is still in progress... Current status: '{job_status}'")
             raise Exception(f"Job {job_id} has not yet completed or failed. Current status: '{job_status}'")
-        job_page.assert_added_notifyuser(email.lower())
+
+        AssertEmail = email.lower()
+        job_page.assert_added_notifyuser(AssertEmail)
 
         # Notifications
         home_page.select_module("/notifications")

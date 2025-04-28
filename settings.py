@@ -1,14 +1,6 @@
 
 
 
-
-
-
-
-
-
-
-
 import os
 import shutil
 import subprocess
@@ -29,17 +21,10 @@ def run_tests_and_send_email():
 
     # Define test cases to run
     test_cases = [
-        "tests/GroupAndUser/test_TC01_createGroup.py",
-        "tests/GroupAndUser/test_TC02_createUser.py",
-        "tests/GroupAndUser/test_TC03_updateUser.py",
-        "tests/GroupAndUser/test_TC04_dataExtraction.py",
-        "tests/GroupAndUser/test_TC05_selectNotifyUser.py",
-        "tests/GroupAndUser/test_TC06_negativeScenarios.py",
-        "tests/GroupAndUser/test_TC07_deleteUser.py",
-        "tests/GroupAndUser/test_TC08_deleteGroup.py",
-        "tests/GroupAndUser/test_TC09_groupPermissions.py",
-        "tests/GroupAndUser/test_TC10_multipleGroups.py",
-        ]
+        "tests/Settings/test_TC01_settings.py",
+
+
+    ]
 
     # Run pytest with Allure
     pytest_command = f"pytest -v -s --alluredir={report_dir} {' '.join(test_cases)}"
@@ -59,7 +44,7 @@ def run_tests_and_send_email():
         return
 
     # Prepare the email body
-    subject = "Automation Test Execution Report for Groups module"
+    subject = "Automation Test Execution Report"
     body = f"Test Execution Summary:\n"
     # body += f"Total Tests: {total_tests}\n"
     body += f"Passed: {passed_tests}\n"
@@ -72,10 +57,10 @@ def run_tests_and_send_email():
     attachment_path = zip_allure_report(allure_report_dir)
 
     # List of recipients
-    recipients = ["pavan.karri@covalensedigital.com", "dasharathi.chakaravarthy@covalensedigital.com"]
+    recipients = ["pavan.karri@covalensedigital.com"]
 
     # Send the email
-    send_email(subject, body, recipients, attachment_path)
+    # send_email(subject, body, recipients, attachment_path)
 
     # Automatically open the Allure report in the default web browser
     open_allure_report(allure_report_dir)
