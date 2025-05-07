@@ -17,7 +17,7 @@ class JobPage(BasePage):
         return self.get_text(element_xpath, f"{job_number} status")
 
     def assert_job_status(self, job_number):
-        max_attempts = 20  # Number of times to retry (30 attempts = 30 minutes)
+        max_attempts = 10  # Number of times to retry (30 attempts = 30 minutes)
         for attempt in range(max_attempts):
             job_status = self.get_job_status(job_number)  # Replace with the actual method to fetch job status
             if job_status == "Completed":

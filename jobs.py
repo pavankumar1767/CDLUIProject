@@ -21,21 +21,23 @@ def run_tests_and_send_email():
 
     # Define test cases to run
     test_cases = [
-        "tests/Job/test_TC01_log.py",
-        "tests/Job/test_TC02_log.py",
-        "tests/Job/test_TC03_trajectory.py",
-        "tests/Job/test_TC04_wellboreGeometry.py",
-        "tests/Job/test_TC05_rig.py",
-        "tests/Job/test_TC06_message.py",
-        "tests/Job/test_TC07_formationMarker.py",
-        "tests/Job/test_TC08_mudlog.py",
-        "tests/Job/test_TC09_cement.py",
-        "tests/Job/test_TC10_risk.py",
-        "tests/Job/test_TC11_bharun.py",
-        "tests/Job/test_TC12_target.py",
-        "tests/Job/test_TC13_singlelogcurve.py",
-        "tests/Job/test_TC14_singleRigObject.py",
-        ]
+        # "tests/Job/test_TC01_log.py",
+        # "tests/Job/test_TC02_log.py",
+        # "tests/Job/test_TC03_trajectory.py",
+        # "tests/Job/test_TC04_wellboreGeometry.py",
+        # "tests/Job/test_TC05_rig.py",
+        # "tests/Job/test_TC06_message.py",
+        # "tests/Job/test_TC07_formationMarker.py",
+        # "tests/Job/test_TC08_mudlog.py",
+        # "tests/Job/test_TC09_cement.py",
+        # "tests/Job/test_TC10_risk.py",
+        # "tests/Job/test_TC11_bharun.py",
+        # "tests/Job/test_TC12_target.py",
+        # "tests/Job/test_TC13_singlelogcurve.py",
+        # "tests/Job/test_TC14_singleRigObject.py",
+        "tests/Job/test_TC15_LoadTest_226H.py",
+
+    ]
 
     # Run pytest with Allure
     pytest_command = f"pytest -v -s --alluredir={report_dir} {' '.join(test_cases)}"
