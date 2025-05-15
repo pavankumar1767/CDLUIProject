@@ -316,3 +316,7 @@ class JobPage(BasePage):
         element_xpath = "//p[@class='error-msg']"
         text = self.get_text(element_xpath, "error message")
         return text
+
+    def select_filter(self, name):
+        element_xpath = f"//td[normalize-space()='{name}']/parent::tr/td[3]//span[normalize-space()='arrow_circle_right_icon']"
+        self.click(element_xpath, f"{name} selected")

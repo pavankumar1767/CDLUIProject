@@ -17,7 +17,7 @@
     "MudlogObjectlist": ["Logs", "BHA Run", "Tubular", "Trajectory", "Messages", "Rig", "Wellbore Geometry"],
     "CementObjectlist": ["Logs", "BHA Run", "Rig", "Trajectory", "Formation Marker", "Wellbore Geometry"],
     "RiskObjectlist": ["Logs", "Rig", "Trajectory", "Messages"],
-    "bharunObjectlist": ["Logs","Mud Log", "Trajectory", "Messages", "Rig", "Wellbore Geometry"],
+    "bharunObjectlist": ["Logs","Mud Log", "Messages", "Rig", "Wellbore Geometry"],
     "targetObjectlist": ["Logs", "BHA Run","Mud Log", "Tubular", "Trajectory", "Messages", "Rig", "Wellbore Geometry"]
   },
   "filter_data": {

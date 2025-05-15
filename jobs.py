@@ -36,6 +36,7 @@ def run_tests_and_send_email():
         # "tests/Job/test_TC13_singlelogcurve.py",
         # "tests/Job/test_TC14_singleRigObject.py",
         "tests/Job/test_TC15_LoadTest_226H.py",
+        # "tests/Job/test_TC01_log.py",
 
     ]
 
@@ -73,7 +74,7 @@ def run_tests_and_send_email():
     recipients = ["pavan.karri@covalensedigital.com", "dasharathi.chakaravarthy@covalensedigital.com"]
 
     # Send the email
-    send_email(subject, body, recipients, attachment_path)
+    # send_email(subject, body, recipients, attachment_path)
 
     # Automatically open the Allure report in the default web browser
     open_allure_report(allure_report_dir)

@@ -28,7 +28,7 @@ class TestTC03:
 
         test_data = TestDataManager.get_test_data()
         well = test_data["wells"]["wellname_6"]
-        Object_list = test_data["wells"]["trajObjectlist"]
+        Object_list = test_data["wells"]["bharunObjectlist"]
         data_Object = "BHA Run"
         data_Object_1 = "Tubular"
 
