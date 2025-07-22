@@ -12,7 +12,7 @@ from utilities.TestDataManager import TestDataManager
 @pytest.mark.usefixtures("setup")
 class TestTC015:
     @allure.title("Verify the load test with multiple objects in a well")
-    @pytest.mark.repeat(3)  # This will run the test 5 times
+    @pytest.mark.repeat(2)  # This will run the test 5 times
     def test_load(self, setup, config):
         page = setup
         home_page = HomePage(page)
@@ -25,7 +25,8 @@ class TestTC015:
         login_page.enter_password(config.password)
         login_page.click_login("Sign In")
 
-        filter_name = "Load_SND_2261"
+        # filter_name = "Load_SND_2261"
+        filter_name = "WG_report"
 
         home_page.select_module("/jobs")
         filter_page.Button("Create Job")

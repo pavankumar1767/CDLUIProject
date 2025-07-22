@@ -4,6 +4,7 @@ class Config:
     password = "Abcd@1234"
     setpassword = "Abcd@1234"
     loopCount = 100
+    rp_password = "3HpeMUr"
 
     WITSML_URL = "https://rockpegion-qa.sigmastream.com/WITSMLStore/services/Store?wsdl"
     Config_Type = "Service Principal"

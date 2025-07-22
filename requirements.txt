@@ -1,6 +1,7 @@
-playwright
+httpx
 pytest
 pytest-playwright
+playwright
 allure-pytest
 Faker
 allure-python-commons

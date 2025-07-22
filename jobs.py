@@ -35,8 +35,9 @@ def run_tests_and_send_email():
         # "tests/Job/test_TC12_target.py",
         # "tests/Job/test_TC13_singlelogcurve.py",
         # "tests/Job/test_TC14_singleRigObject.py",
-        "tests/Job/test_TC15_LoadTest_226H.py",
+        # "tests/Job/test_TC15_LoadTest_226H.py",
         # "tests/Job/test_TC01_log.py",
+        "tests/Job/test_TC_16.py",
 
     ]
 
